@@ -1,154 +1,113 @@
-const menuBtn = document.querySelector(".menu-btn");
-const mobileDrawer = document.querySelector(".mobile-drawer");
+// Footer year
+document.getElementById("year").textContent = new Date().getFullYear();
 
-// Nav underline animation
-const tabs = Array.from(document.querySelectorAll(".nav-links .tab"));
-const underline = document.querySelector(".tab-underline");
+// Mobile menu toggle
+const burger = document.getElementById("burger");
+const mobileMenu = document.getElementById("mobileMenu");
 
-function moveUnderlineTo(el) {
-  if (!underline || !el) return;
-  const parentRect = el.parentElement.getBoundingClientRect();
-  const rect = el.getBoundingClientRect();
-  underline.style.width = `${rect.width}px`;
-  underline.style.left = `${rect.left - parentRect.left}px`;
-}
-
-function setActiveByHash() {
-  const hash = window.location.hash || "#home";
-  const match = tabs.find(a => a.getAttribute("href") === hash) || tabs[0];
-
-  tabs.forEach(t => t.classList.remove("active"));
-  match.classList.add("active");
-  moveUnderlineTo(match);
-}
-
-window.addEventListener("load", () => {
-  setActiveByHash();
-  document.getElementById("year").textContent = new Date().getFullYear();
+burger?.addEventListener("click", () => {
+  mobileMenu.classList.toggle("open");
 });
-window.addEventListener("hashchange", setActiveByHash);
-window.addEventListener("resize", setActiveByHash);
 
-tabs.forEach(t => t.addEventListener("click", () => {
-  tabs.forEach(x => x.classList.remove("active"));
-  t.classList.add("active");
-  moveUnderlineTo(t);
-}));
+// Close mobile menu on link click
+mobileMenu?.addEventListener("click", (e) => {
+  if (e.target.tagName === "A") mobileMenu.classList.remove("open");
+});
 
 // Reveal on scroll
-const reveals = Array.from(document.querySelectorAll(".reveal"));
+const reveals = document.querySelectorAll(".reveal");
 const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("in"); });
-}, { threshold: 0.12 });
-reveals.forEach(el => io.observe(el));
-
-// Mobile drawer
-menuBtn.addEventListener("click", () => {
-  const isOpen = mobileDrawer.classList.toggle("show");
-  menuBtn.setAttribute("aria-expanded", String(isOpen));
-  mobileDrawer.setAttribute("aria-hidden", String(!isOpen));
-});
-
-// Close drawer when clicking a link
-document.querySelectorAll(".drawer-link").forEach(link => {
-  link.addEventListener("click", () => {
-    mobileDrawer.classList.remove("show");
-    menuBtn.setAttribute("aria-expanded", "false");
-    mobileDrawer.setAttribute("aria-hidden", "true");
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) entry.target.classList.add("show");
   });
-});
+}, { threshold: 0.12 });
 
-// Modal (for “Read more” buttons only)
+reveals.forEach((el) => io.observe(el));
+
+// Modal logic
 const modal = document.getElementById("modal");
-const modalOverlay = document.getElementById("modalOverlay");
 const modalTitle = document.getElementById("modalTitle");
 const modalBody = document.getElementById("modalBody");
-const modalClose = document.getElementById("modalClose");
 
 const modalContent = {
-  about: {
-    title: "About (full)",
+  barcode: {
+    title: "Barcode Scanning + SAP (Endress+Hauser)",
     body: `
       <p>
-        I’m Brandon. I’m really into work where you have to connect the dots between people, process, and systems.
-        I don’t love “busywork” — I like ownership, clarity, and outcomes.
+        This project was about getting out of manual entry and into a workflow that could scale.
+        I was the main point of contact between the Gas Measurement team and external vendors, and I led
+        working meetings to keep decisions moving.
       </p>
 
-      <h3>What I’m good at</h3>
+      <h3>My role</h3>
       <ul>
-        <li>Leading working sessions and keeping teams aligned on decisions and next steps</li>
-        <li>Taking unclear requirements and turning them into something executable</li>
-        <li>Building decision-ready reporting that leadership actually trusts</li>
+        <li>Main point of contact between internal team and vendors</li>
+        <li>Coordinated and led meetings with software vendors</li>
+        <li>Supported workflow changes tied into SAP to improve fulfillment</li>
       </ul>
 
-      <h3>Outside of work</h3>
+      <h3>Impact</h3>
       <ul>
-        <li>Mini roadtrips about twice a month</li>
-        <li>Pickleball and working out</li>
-        <li>Trying new food spots (I’m a big foodie)</li>
+        <li>Eliminated 75% of manual data entry</li>
+        <li>Accelerated fulfillment speed by 40%</li>
+        <li>Drove three division-wide process enhancements</li>
       </ul>
+
+      <p style="margin-top:12px; opacity:.85;">
+        Note: I’m not posting internal slides or customer data — just the work and outcomes at a high level.
+      </p>
     `
   },
-  skills: {
-    title: "Skills (detail)",
+
+  expedited: {
+    title: "Expedited Orders Analytics (Endress+Hauser)",
     body: `
-      <h3>Systems and delivery</h3>
+      <p>
+        I analyzed expedited order trends to find what was driving urgency and where the process was breaking down.
+        The goal was to help production treat expedites as exceptions, not the default.
+      </p>
+
+      <h3>What I did</h3>
       <ul>
-        <li>SAP workflow thinking, rollout support, vendor coordination, requirements tracking</li>
-        <li>Stakeholder management and clear status communication</li>
+        <li>Analyzed 120,000+ expedited order records to identify bottlenecks</li>
+        <li>Built automated dashboards using Excel VBA and Power BI</li>
+        <li>Created reporting leaders could actually use to plan and prioritize</li>
       </ul>
 
-      <h3>Analytics and automation</h3>
+      <h3>Results</h3>
       <ul>
-        <li>Power BI dashboards and KPI reporting</li>
-        <li>Excel automation (VBA), cleanup, and performance improvements</li>
-        <li>SQL foundations for querying and analysis</li>
+        <li>Reduced urgent requests by 25%</li>
+        <li>Increased throughput by 15%</li>
+        <li>Cut reporting time by 40%</li>
       </ul>
 
-      <h3>Technology Risk foundation</h3>
-      <ul>
-        <li>ITGC and SOX mindset; documenting and validating what “good” looks like</li>
-        <li>Interest in ERP controls, governance, and audit-ready processes</li>
-      </ul>
+      <p style="margin-top:12px; opacity:.85;">
+        I can add your own project photos here (not internal screenshots) if you want the case study to feel more visual.
+      </p>
     `
   },
-  works: {
-    title: "Works (highlights)",
+
+  meta: {
+    title: "Meta AI Case Project (Business Planning Consultant)",
     body: `
-      <h3>Endress+Hauser · Business Systems Analyst Intern</h3>
+      <p>
+        For a Meta case project, I helped design a moderation workflow that combines AI automation with human-in-the-loop
+        checkpoints. The goal was speed without sacrificing compliance and quality.
+      </p>
+
+      <h3>What we built</h3>
       <ul>
-        <li>Led SAP-connected barcode scanning rollout with vendors and cross-functional stakeholders</li>
-        <li>Analyzed 120,000+ order records; reduced expedited requests by 25% and improved throughput by 15%</li>
-        <li>Built reporting that improved decision speed and visibility</li>
+        <li>AI-driven moderation workflow with human validation at key points</li>
+        <li>Operating model focused on scale, consistency, and clear ownership</li>
+        <li>Recommendations designed for pilot-to-scale rollout</li>
       </ul>
 
-      <h3>CUBIO Innovation Hub · Business Strategy Consulting Intern</h3>
+      <h3>Projected impact</h3>
       <ul>
-        <li>Consulting-style engagement: research, synthesis, and leadership-ready recommendations</li>
-        <li>Worked on an 8-person team supporting growth and partnerships</li>
+        <li>Reduced content backlog by 20% across five pilot teams</li>
+        <li>Projected 12% reduction in review costs</li>
+        <li>Projected 30% improvement in moderation efficiency</li>
       </ul>
-
-      <h3>RSM · Incoming Technology Risk Consulting Intern</h3>
-      <ul>
-        <li>Building depth in ITGC, SOX, and ERP control environments</li>
-      </ul>
-
-      <div class="cta-row">
-        <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
-        <a href="mailto:BrandoonTran6006@gmail.com">Email</a>
-      </div>
-    `
-  },
-  contact: {
-    title: "Contact",
-    body: `
-      <p><strong>Email:</strong> <a href="mailto:BrandoonTran6006@gmail.com">BrandoonTran6006@gmail.com</a></p>
-      <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/btran123" target="_blank" rel="noopener">linkedin.com/in/btran123</a></p>
-      <p><strong>Resume:</strong> <a href="resume.pdf" target="_blank" rel="noopener">Open resume</a></p>
-      <div class="cta-row">
-        <a href="mailto:BrandoonTran6006@gmail.com">Email me</a>
-        <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
-      </div>
     `
   }
 };
@@ -156,25 +115,26 @@ const modalContent = {
 function openModal(key) {
   const content = modalContent[key];
   if (!content) return;
+
   modalTitle.textContent = content.title;
   modalBody.innerHTML = content.body;
+
   modal.classList.add("open");
-  modalOverlay.classList.add("open");
-  modal.setAttribute("aria-hidden", "false");
-  modalOverlay.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
 }
 
 function closeModal() {
   modal.classList.remove("open");
-  modalOverlay.classList.remove("open");
-  modal.setAttribute("aria-hidden", "true");
-  modalOverlay.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
 }
 
-document.querySelectorAll("[data-modal]").forEach(btn => {
-  btn.addEventListener("click", () => openModal(btn.dataset.modal));
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-modal]");
+  if (btn) openModal(btn.getAttribute("data-modal"));
+
+  if (e.target.matches("[data-close]")) closeModal();
 });
 
-modalClose.addEventListener("click", closeModal);
-modalOverlay.addEventListener("click", closeModal);
-document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
+});
