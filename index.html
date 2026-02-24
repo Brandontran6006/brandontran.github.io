@@ -4,32 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Brandon Tran | Tech Risk, ERP, Analytics</title>
-  <meta name="description" content="Brandon Tran — Technology Risk, ERP workflows, and analytics. Portfolio and highlights." />
+  <meta name="description" content="Brandon Tran — Technology Risk, ERP workflows, and analytics. Consulting-style portfolio." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <!-- Background blobs -->
+  <!-- Background -->
   <div class="bg-blobs" aria-hidden="true">
     <span class="blob blob-1"></span>
     <span class="blob blob-2"></span>
     <span class="blob blob-3"></span>
   </div>
 
-  <!-- Top Nav -->
+  <!-- NAV -->
   <header class="nav">
     <div class="container nav-inner">
-      <a class="brand" href="#" aria-label="Go to top">
+      <a class="brand" href="#home" aria-label="Go to top">
         <span class="brand-dot"></span>
         <span class="brand-name">Brandon Tran</span>
       </a>
 
       <nav class="nav-links" aria-label="Primary navigation">
-        <button class="tab active" data-modal="home" type="button">Home</button>
-        <button class="tab" data-modal="about" type="button">About</button>
-        <button class="tab" data-modal="skills" type="button">Skills</button>
-        <button class="tab" data-modal="works" type="button">Works</button>
-        <button class="tab" data-modal="contact" type="button">Contact</button>
+        <a class="tab active" href="#home">Home</a>
+        <a class="tab" href="#about">About</a>
+        <a class="tab" href="#skills">Skills</a>
+        <a class="tab" href="#works">Works</a>
+        <a class="tab" href="#contact">Contact</a>
         <div class="tab-underline" aria-hidden="true"></div>
       </nav>
 
@@ -38,19 +38,19 @@
 
     <!-- Mobile drawer -->
     <div class="mobile-drawer" aria-hidden="true">
-      <button class="drawer-link" data-modal="home" type="button">Home</button>
-      <button class="drawer-link" data-modal="about" type="button">About</button>
-      <button class="drawer-link" data-modal="skills" type="button">Skills</button>
-      <button class="drawer-link" data-modal="works" type="button">Works</button>
-      <button class="drawer-link" data-modal="contact" type="button">Contact</button>
+      <a class="drawer-link" href="#home">Home</a>
+      <a class="drawer-link" href="#about">About</a>
+      <a class="drawer-link" href="#skills">Skills</a>
+      <a class="drawer-link" href="#works">Works</a>
+      <a class="drawer-link" href="#contact">Contact</a>
 
       <a class="drawer-cta" href="resume.pdf" target="_blank" rel="noopener">Download Resume</a>
     </div>
   </header>
 
   <main class="container">
-    <!-- Hero -->
-    <section class="hero reveal">
+    <!-- HOME -->
+    <section id="home" class="hero reveal">
       <div class="hero-left">
         <p class="chip">University of Houston • MIS & Marketing • 3.97 GPA</p>
 
@@ -59,22 +59,15 @@
         </h1>
 
         <p class="subhead">
-          I like work where you have to connect the dots — people, process, systems — and still deliver something measurable.
-          I’ve led vendor + stakeholder meetings on an SAP barcode rollout, built dashboards leaders actually use,
-          and I’m heading into Technology Risk Consulting at RSM.
+          I’m the kind of person who likes being in the middle of the action — running meetings, translating between
+          operations and tech, and making sure projects move forward. I led a barcode scanning rollout tied to SAP at
+          Endress+Hauser, built reporting leaders actually use, and I’m heading into Technology Risk Consulting at RSM.
         </p>
 
         <div class="hero-cta">
-          <a class="btn primary" href="resume.pdf" target="_blank" rel="noopener">
-            Resume
-            <span class="btn-glow" aria-hidden="true"></span>
-          </a>
-          <a class="btn ghost" href="https://linkedin.com/in/btran123" target="_blank" rel="noopener">
-            LinkedIn
-          </a>
-          <a class="btn ghost" href="mailto:BrandoonTran6006@gmail.com">
-            Email
-          </a>
+          <a class="btn primary" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+          <a class="btn ghost" href="mailto:BrandoonTran6006@gmail.com">Email</a>
+          <a class="btn ghost" href="https://linkedin.com/in/btran123" target="_blank" rel="noopener">LinkedIn</a>
         </div>
 
         <div class="stats">
@@ -95,16 +88,15 @@
 
       <aside class="hero-card reveal">
         <div class="avatar-wrap">
-          <img class="avatar" src="headshot.jpg" alt="Brandon Tran headshot" />
           <div class="avatar-blob" aria-hidden="true"></div>
+          <img class="avatar" src="headshot.jpg" alt="Brandon Tran headshot" />
         </div>
 
-        <div class="card-title">Quick snapshot</div>
+        <div class="card-title">Right now</div>
         <ul class="snap">
-          <li><strong>RSM</strong> — Incoming Technology Risk Consulting Intern</li>
-          <li><strong>Endress+Hauser</strong> — Systems + analytics (SAP, Power BI, VBA)</li>
-          <li><strong>CUBIO</strong> — Strategy consulting engagement</li>
-          <li><strong>Leadership</strong> — Team lead + operations manager experience</li>
+          <li><strong>Incoming:</strong> Technology Risk Consulting Intern, RSM</li>
+          <li><strong>Recent:</strong> Business Systems Analyst Intern, Endress+Hauser</li>
+          <li><strong>Recent:</strong> Business Strategy Consulting Intern, CUBIO Innovation Hub</li>
         </ul>
 
         <div class="micro">
@@ -116,51 +108,184 @@
       </aside>
     </section>
 
-    <!-- Feature cards (no repetitive buttons) -->
-    <section class="grid3">
-      <article class="card reveal hoverlift">
-        <div class="card-icon">🧩</div>
-        <h2 class="card-h">Systems & delivery</h2>
-        <p class="card-p">
-          I’m comfortable leading meetings, documenting requirements, aligning stakeholders, and keeping projects moving
-          when there are vendors involved and the scope is messy.
-        </p>
-      </article>
+    <!-- ABOUT -->
+    <section id="about" class="section reveal">
+      <div class="section-top">
+        <h2>About</h2>
+        <button class="mini-btn" type="button" data-modal="about">Read the full story</button>
+      </div>
 
-      <article class="card reveal hoverlift">
-        <div class="card-icon">📊</div>
-        <h2 class="card-h">Analytics with outcomes</h2>
-        <p class="card-p">
-          Dashboards only matter if people use them. I focus on building reporting that’s fast, clear, and tied to decisions.
-        </p>
-      </article>
+      <div class="grid2">
+        <div class="card hoverlift">
+          <h3 class="card-h">How I work</h3>
+          <p class="card-p">
+            I’m calm in messy situations. If the scope is unclear or stakeholders aren’t aligned, I’ll pull people together,
+            document what matters, and keep the project moving without overcomplicating it.
+          </p>
+          <ul class="list">
+            <li>Clear updates and next steps</li>
+            <li>Stakeholder + vendor coordination</li>
+            <li>Practical, measurable outcomes</li>
+          </ul>
+        </div>
 
-      <article class="card reveal hoverlift">
-        <div class="card-icon">🛡️</div>
-        <h2 class="card-h">Risk mindset</h2>
-        <p class="card-p">
-          I like controls work because it forces clean thinking: what can go wrong, how do we prove it’s working,
-          and how do we communicate it clearly to leadership?
-        </p>
-      </article>
+        <div class="card hoverlift">
+          <h3 class="card-h">Outside of work</h3>
+          <p class="card-p">
+            I’m pretty active and always doing something.
+          </p>
+          <div class="pillrow">
+            <span class="pill">Mini roadtrips (2×/month)</span>
+            <span class="pill">Pickleball</span>
+            <span class="pill">Working out</span>
+            <span class="pill">Big foodie</span>
+          </div>
+          <p class="card-p subtle">
+            I like exploring new spots around Houston (and randomly ending up in Austin or Dallas for the weekend).
+          </p>
+        </div>
+      </div>
     </section>
 
-    <footer class="footer reveal">
-      <div class="footer-left">
-        <div class="footer-title">Want the short version?</div>
-        <div class="footer-sub">Use the tabs (About / Skills / Works) — they open quick popups with the good stuff.</div>
+    <!-- SKILLS -->
+    <section id="skills" class="section reveal">
+      <div class="section-top">
+        <h2>Skills</h2>
+        <button class="mini-btn" type="button" data-modal="skills">See details</button>
       </div>
-      <div class="footer-right">
-        <a class="pill-link" href="mailto:BrandoonTran6006@gmail.com">Email</a>
-        <a class="pill-link" href="https://linkedin.com/in/btran123" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="pill-link" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+
+      <div class="grid3">
+        <article class="card hoverlift">
+          <div class="card-icon">🧩</div>
+          <h3 class="card-h">Systems</h3>
+          <p class="card-p">ERP workflow thinking, requirements, rollout support, process mapping.</p>
+          <div class="pillrow">
+            <span class="pill">SAP</span>
+            <span class="pill">Workflow design</span>
+            <span class="pill">Vendor coordination</span>
+          </div>
+        </article>
+
+        <article class="card hoverlift">
+          <div class="card-icon">📊</div>
+          <h3 class="card-h">Analytics</h3>
+          <p class="card-p">Dashboards and reporting built for decisions, not just charts.</p>
+          <div class="pillrow">
+            <span class="pill">Power BI</span>
+            <span class="pill">Excel VBA</span>
+            <span class="pill">SQL</span>
+          </div>
+        </article>
+
+        <article class="card hoverlift">
+          <div class="card-icon">🛡️</div>
+          <h3 class="card-h">Technology Risk</h3>
+          <p class="card-p">Controls mindset that fits consulting work and audit-readiness.</p>
+          <div class="pillrow">
+            <span class="pill">ITGC</span>
+            <span class="pill">SOX 404</span>
+            <span class="pill">COBIT / NIST</span>
+          </div>
+        </article>
       </div>
+    </section>
+
+    <!-- WORKS -->
+    <section id="works" class="section reveal">
+      <div class="section-top">
+        <h2>Works</h2>
+        <button class="mini-btn" type="button" data-modal="works">Open highlights</button>
+      </div>
+
+      <div class="work-banner hoverlift">
+        <img src="eh-team.jpg" alt="Brandon at Endress+Hauser internship" />
+        <div class="work-banner-overlay"></div>
+        <div class="work-banner-text">
+          <div class="work-eyebrow">Endress+Hauser</div>
+          <div class="work-title">On-site systems + operations work</div>
+          <div class="work-sub">Hands-on stakeholder coordination, process improvement, and delivery.</div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card hoverlift">
+          <h3 class="card-h">Endress+Hauser · Business Systems Analyst Intern</h3>
+          <p class="card-p">
+            Led an SAP-connected barcode scanning rollout and worked on analytics that reduced expedite pressure and improved flow.
+          </p>
+          <ul class="list">
+            <li>Led cross-functional + vendor meetings; primary point of contact for requirements and rollout</li>
+            <li>Barcode scanning implementation tied into SAP to reduce manual entry and speed fulfillment</li>
+            <li>Analyzed 120,000+ order records; reduced expedited requests by 25% and improved throughput by 15%</li>
+          </ul>
+        </div>
+
+        <div class="card hoverlift">
+          <h3 class="card-h">CUBIO Innovation Hub · Business Strategy Consulting Intern</h3>
+          <p class="card-p">
+            Strategy engagement work that felt like real consulting: research, synthesis, and executive-ready recommendations.
+          </p>
+          <ul class="list">
+            <li>Worked on an 8-person consulting team supporting growth and partnership strategy</li>
+            <li>Synthesized findings into a clear narrative for leadership presentations</li>
+            <li>Delivered recommendations that were realistic to execute, not just “nice ideas”</li>
+          </ul>
+        </div>
+
+        <div class="card hoverlift">
+          <h3 class="card-h">RSM US LLP · Technology Risk Consulting Intern (Incoming)</h3>
+          <p class="card-p">
+            Joining Technology Risk to build depth in ITGC, SOX, and ERP control environments.
+          </p>
+          <ul class="list">
+            <li>Interest areas: ITGC testing, SOC work, ERP controls, and governance</li>
+            <li>Goal: become sharp at both evidence and communication (what matters, why it matters)</li>
+          </ul>
+        </div>
+
+        <div class="card hoverlift">
+          <h3 class="card-h">Other Experience</h3>
+          <ul class="list">
+            <li><strong>Sushi Masa:</strong> Server Team Leader (high-volume team coordination)</li>
+            <li><strong>Kirkwood Washateria:</strong> General Manager (operations + process improvement)</li>
+          </ul>
+          <p class="card-p subtle">
+            Both roles taught me pace, accountability, and how to lead when it’s busy and nothing goes perfectly.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section reveal">
+      <div class="section-top">
+        <h2>Contact</h2>
+        <button class="mini-btn" type="button" data-modal="contact">Open contact card</button>
+      </div>
+
+      <div class="contact-card hoverlift">
+        <div>
+          <div class="contact-title">Let’s connect</div>
+          <div class="contact-sub">
+            Open to Technology Risk, Tech Consulting, Business Analyst, and Systems roles.
+          </div>
+        </div>
+
+        <div class="contact-actions">
+          <a class="pill-link" href="mailto:BrandoonTran6006@gmail.com">BrandoonTran6006@gmail.com</a>
+          <a class="pill-link" href="https://linkedin.com/in/btran123" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="pill-link" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="tiny-footer">
+      © <span id="year"></span> Brandon Tran
     </footer>
   </main>
 
-  <!-- Modal (popups) -->
+  <!-- MODAL -->
   <div class="modal-overlay" id="modalOverlay" aria-hidden="true"></div>
-
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
     <div class="modal-top">
       <div class="modal-title" id="modalTitle">Title</div>
