@@ -4,11 +4,516 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Brandon Tran | Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    :root{
+      --bg: #0b0f1a;
+      --panel: rgba(255,255,255,.04);
+      --line: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.55);
+      --radius: 18px;
+    }
+
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
+    body{
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 600px at 20% 10%, rgba(110,120,255,.18), transparent 60%),
+                  radial-gradient(900px 500px at 85% 20%, rgba(0,255,200,.10), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+    }
+    a{ color: inherit; text-decoration: none; }
+    .container{ width: min(1100px, 92%); margin: 0 auto; }
+
+    /* NAV */
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(11,15,26,.72);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 16px;
+    }
+
+    .logo{
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+
+    .links{
+      display:flex;
+      gap: 16px;
+      align-items:center;
+    }
+
+    .links a{
+      color: rgba(255,255,255,.82);
+      font-weight: 800;
+      font-size: 13px;
+      padding: 10px 10px;
+      border-radius: 12px;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .links a:hover{
+      background: rgba(255,255,255,.06);
+      transform: translateY(-1px);
+    }
+
+    .nav-cta{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+    }
+
+    .primary{
+      display:inline-block;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: rgba(110,120,255,.95);
+      color: white;
+      font-weight: 900;
+      border: 1px solid rgba(255,255,255,.12);
+      transition: transform .18s ease, filter .18s ease;
+    }
+
+    .primary:hover{ transform: translateY(-2px); filter: brightness(1.05); }
+
+    .ghost{
+      display:inline-block;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.90);
+      font-weight: 900;
+      transition: transform .18s ease, background .18s ease;
+    }
+
+    .ghost:hover{ transform: translateY(-2px); background: rgba(255,255,255,.09); }
+
+    .burger{
+      display:none;
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      cursor: pointer;
+    }
+    .burger span{
+      display:block;
+      height: 2px;
+      width: 18px;
+      background: rgba(255,255,255,.82);
+      margin: 5px auto;
+    }
+
+    .mobile{
+      display:none;
+      padding: 10px 4%;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .mobile a{
+      display:block;
+      padding: 12px 10px;
+      border-radius: 12px;
+      font-weight: 900;
+      color: rgba(255,255,255,.86);
+    }
+    .mobile a:hover{ background: rgba(255,255,255,.06); }
+    .mobile.open{ display:block; }
+
+    /* HERO */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      padding: 34px 0 8px;
+      align-items: start;
+    }
+
+    .pill{
+      display:inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.84);
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(34px, 4.2vw, 54px);
+      line-height: 1.05;
+      letter-spacing: -0.6px;
+    }
+    .grad{
+      background: linear-gradient(90deg, rgba(110,120,255,1), rgba(0,255,200,1));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .sub{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    .hero-actions{
+      margin-top: 18px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .mini-row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .mini-card{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+
+    .mini-top{
+      color: var(--muted2);
+      font-weight: 900;
+      font-size: 12px;
+    }
+
+    .mini-big{
+      margin-top: 6px;
+      font-weight: 1000;
+    }
+
+    .mini-sub{
+      margin-top: 6px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* Hero card */
+    .hero-card{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+
+    .avatar{
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,.10);
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+      margin: 0 auto 14px;
+    }
+    .avatar img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display:block;
+    }
+
+    .hero-card-text{ text-align: center; }
+    .hero-name{ font-weight: 1000; font-size: 18px; }
+    .hero-role{ margin-top: 6px; color: var(--muted); font-weight: 800; font-size: 13px; }
+
+    .pillrow{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 12px;
+    }
+
+    .tag{
+      display:inline-block;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.86);
+      font-weight: 900;
+      font-size: 12px;
+    }
+
+    .hero-links{
+      display:flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .link{
+      color: rgba(255,255,255,.86);
+      font-weight: 900;
+      border-bottom: 1px solid rgba(255,255,255,.22);
+      padding-bottom: 2px;
+    }
+
+    /* SECTIONS */
+    .section{ padding: 44px 0 10px; }
+
+    .section-top{
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .section-top h2{
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: -0.3px;
+    }
+
+    .section-note{
+      margin: 0;
+      color: rgba(255,255,255,.70);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid3{ display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+
+    .card-h{ margin: 0; font-size: 15px; font-weight: 1000; }
+
+    .card-p{
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 650;
+    }
+
+    .list{
+      margin: 10px 0 0 18px;
+      color: rgba(255,255,255,.78);
+      line-height: 1.65;
+      font-weight: 650;
+    }
+
+    /* WORK BANNER */
+    .work-banner{
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      height: 260px;
+      margin: 10px 0 14px;
+    }
+
+    .work-banner img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+      filter: saturate(1.05) contrast(1.02);
+      transform: scale(1.02);
+    }
+
+    .work-banner-overlay{
+      position:absolute;
+      inset:0;
+      background: linear-gradient(90deg, rgba(11,15,26,.88), rgba(11,15,26,.25));
+    }
+
+    .work-banner-text{
+      position:absolute;
+      left: 18px;
+      bottom: 18px;
+      right: 18px;
+    }
+
+    .work-eyebrow{ font-weight: 1000; color: rgba(255,255,255,.82); font-size: 13px; }
+    .work-title{ margin-top: 6px; font-weight: 1100; font-size: 22px; letter-spacing: -0.3px; }
+    .work-sub{ margin-top: 6px; color: rgba(255,255,255,.78); font-weight: 750; }
+
+    /* Case buttons */
+    .case-buttons{
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 12px 0 10px;
+    }
+
+    .case-buttons.center{
+      justify-content: center;
+    }
+
+    .mini-btn{
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.92);
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .mini-btn:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.22);
+    }
+
+    /* Footer */
+    .footer{
+      margin: 40px 0 30px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: rgba(255,255,255,.70);
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .footnote{ color: rgba(255,255,255,.55); }
+
+    /* Hover lift */
+    .hoverlift{
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .hoverlift:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 20px 70px rgba(0,0,0,.35);
+      border-color: rgba(255,255,255,.16);
+    }
+
+    /* Modal */
+    .modal{
+      position: fixed;
+      inset: 0;
+      display: none;
+      z-index: 9999;
+    }
+
+    .modal.open{ display: block; }
+
+    .modal-backdrop{
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.60);
+      backdrop-filter: blur(6px);
+      animation: fadeIn .18s ease both;
+    }
+
+    .modal-card{
+      position: relative;
+      max-width: 860px;
+      margin: 60px auto;
+      background: rgba(15,18,28,.92);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 18px;
+      padding: 22px 22px 18px;
+      box-shadow: 0 30px 120px rgba(0,0,0,.55);
+      animation: popIn .18s ease both;
+    }
+
+    .modal-x{
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.9);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor: pointer;
+    }
+
+    .modal-body{
+      margin-top: 10px;
+      color: rgba(255,255,255,.84);
+      line-height: 1.6;
+      font-weight: 650;
+    }
+
+    .modal-body h3{
+      margin: 14px 0 8px;
+      font-size: 15px;
+      color: rgba(255,255,255,.92);
+    }
+
+    .modal-body ul{
+      margin: 8px 0 0 18px;
+      color: rgba(255,255,255,.80);
+    }
+
+    @keyframes fadeIn{
+      from{ opacity: 0; }
+      to{ opacity: 1; }
+    }
+
+    @keyframes popIn{
+      from{ transform: translateY(10px) scale(.98); opacity: 0; }
+      to{ transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    /* Reveal animation */
+    .reveal{
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .links, .nav-cta{ display:none; }
+      .burger{ display:block; }
+
+      .hero{ grid-template-columns: 1fr; }
+      .mini-row{ grid-template-columns: 1fr; }
+      .grid2{ grid-template-columns: 1fr; }
+      .grid3{ grid-template-columns: 1fr; }
+      .work-banner{ height: 230px; }
+    }
+  </style>
 </head>
 
 <body>
-  <!-- Top bar -->
   <header class="nav">
     <div class="container nav-inner">
       <a class="logo" href="#home">Brandon Tran</a>
@@ -31,7 +536,6 @@
       </button>
     </div>
 
-    <!-- Mobile menu -->
     <div class="mobile" id="mobileMenu">
       <a href="#home">Home</a>
       <a href="#about">About</a>
@@ -42,9 +546,7 @@
     </div>
   </header>
 
-  <!-- Main -->
   <main id="home" class="container">
-    <!-- HERO -->
     <section class="hero reveal">
       <div class="hero-left">
         <p class="pill">MIS & Marketing • University of Houston (Bauer)</p>
@@ -55,8 +557,8 @@
         </h1>
 
         <p class="sub">
-          I’m a systems + strategy type — I like projects where I can coordinate people,
-          dig into the data, and ship something that actually changes how work gets done.
+          I’m a systems + strategy type. I like projects where I can coordinate people, dig into the data,
+          and ship something that actually changes how work gets done.
         </p>
 
         <div class="hero-actions">
@@ -72,9 +574,9 @@
           </div>
 
           <div class="mini-card hoverlift">
-            <div class="mini-top">Style</div>
-            <div class="mini-big">Consulting mindset</div>
-            <div class="mini-sub">Clear story + measurable impact</div>
+            <div class="mini-top">How I work</div>
+            <div class="mini-big">High ownership</div>
+            <div class="mini-sub">Clear communication + measurable impact</div>
           </div>
         </div>
       </div>
@@ -82,7 +584,7 @@
       <div class="hero-right">
         <div class="hero-card hoverlift">
           <div class="avatar">
-            <img src="assets/profile.jpg" alt="Brandon Tran headshot" />
+            <img src="headshot.jpg" alt="Brandon Tran headshot" />
           </div>
 
           <div class="hero-card-text">
@@ -97,7 +599,6 @@
             </div>
 
             <div class="hero-links">
-              <!-- Replace with your real LinkedIn URL -->
               <a class="link" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
               <a class="link" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
               <a class="link" href="mailto:BrandoonTran6006@gmail.com">Email</a>
@@ -107,49 +608,45 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
     <section id="about" class="section reveal">
       <div class="section-top">
         <h2>About</h2>
-        <p class="section-note">Not the “template” version — this is actually me.</p>
+        <p class="section-note">A quick overview.</p>
       </div>
 
       <div class="grid2">
         <div class="card hoverlift">
-          <h3 class="card-h">What I’m into</h3>
+          <h3 class="card-h">What I do</h3>
           <p class="card-p">
-            I’m at my best when I’m bridging teams: aligning stakeholders, turning vague problems into clear action,
+            I’m at my best when I’m bridging teams — aligning stakeholders, turning vague problems into clear action,
             and building something that’s simple enough to maintain after I’m gone.
           </p>
-
           <ul class="list">
-            <li>Systems + operations improvements (especially around ERP workflows)</li>
+            <li>Systems + operations improvements (especially ERP workflows)</li>
             <li>Project coordination and stakeholder communication</li>
-            <li>Dashboards that people actually use</li>
+            <li>Dashboards and reporting that leadership actually uses</li>
           </ul>
         </div>
 
         <div class="card hoverlift">
           <h3 class="card-h">Outside of work</h3>
           <p class="card-p">
-            I’m a big “reset” person — mini roadtrips twice a month, pickleball when the weather is good,
-            gym most days, and I’ll try any food spot if it has a line (I’m weak, I know).
+            I’m big on mini roadtrips (about twice a month), pickleball, the gym, and trying new food spots.
+            I like staying busy, but I also like building routines that keep me consistent.
           </p>
           <div class="pillrow">
             <span class="tag">Houston-based</span>
-            <span class="tag">Curious by default</span>
-            <span class="tag">Fast learner</span>
             <span class="tag">High ownership</span>
+            <span class="tag">Fast learner</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SKILLS -->
     <section id="skills" class="section reveal">
       <div class="section-top">
         <h2>Skills</h2>
-        <p class="section-note">The stack I’m actually using (not a buzzword list).</p>
+        <p class="section-note">Tools and strengths.</p>
       </div>
 
       <div class="grid3">
@@ -169,7 +666,7 @@
             <span class="tag">Stakeholder mgmt</span>
             <span class="tag">Process mapping</span>
             <span class="tag">Data storytelling</span>
-            <span class="tag">Exec-ready decks</span>
+            <span class="tag">Executive summaries</span>
           </div>
         </div>
 
@@ -177,24 +674,22 @@
           <h3 class="card-h">Risk / Controls</h3>
           <div class="pillrow">
             <span class="tag">ITGC awareness</span>
-            <span class="tag">SOX readiness</span>
             <span class="tag">Evidence mindset</span>
             <span class="tag">Control documentation</span>
+            <span class="tag">SOX readiness</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- WORKS -->
     <section id="works" class="section reveal">
       <div class="section-top">
         <h2>Works</h2>
-        <p class="section-note">Click into case studies for details — they open in pop-ups.</p>
+        <p class="section-note">Case studies open in popups.</p>
       </div>
 
-      <!-- Big banner photo -->
       <div class="work-banner hoverlift">
-        <img src="assets/eh-team.jpg" alt="Brandon at Endress+Hauser internship" />
+        <img src="eh-team.jpg" alt="Brandon at Endress+Hauser internship" />
         <div class="work-banner-overlay"></div>
         <div class="work-banner-text">
           <div class="work-eyebrow">Endress+Hauser • Gas Measurement Division</div>
@@ -203,25 +698,12 @@
         </div>
       </div>
 
-      <!-- Optional project photos -->
-      <div class="photo-row">
-        <figure class="photo-card hoverlift">
-          <img src="assets/barcode.jpg" alt="Barcode scanning project photo" />
-          <figcaption>Barcode Scanning Project</figcaption>
-        </figure>
-
-        <figure class="photo-card hoverlift">
-          <img src="assets/expedited.jpg" alt="Expedited orders project photo" />
-          <figcaption>Expedited Orders Project</figcaption>
-        </figure>
-      </div>
-
       <div class="grid2">
         <div class="card hoverlift">
           <h3 class="card-h">Endress+Hauser • Business Systems Analyst Intern</h3>
           <p class="card-p">
-            My summer was basically: solve problems that slow down fulfillment. The two biggest wins were
-            barcode scanning workflow improvements tied into SAP, and an expedited-orders analysis + reporting build-out.
+            Focused on fulfillment and process improvements. I coordinated with internal stakeholders and software vendors,
+            and built reporting that helped teams prioritize work and reduce urgent requests.
           </p>
 
           <div class="case-buttons">
@@ -245,18 +727,18 @@
           </p>
           <ul class="list">
             <li>ITGC mindset, walkthroughs, evidence, and documentation</li>
-            <li>Interest areas: SOX, ERP controls, governance, and scalable processes</li>
+            <li>Interest areas: SOX, ERP controls, governance, scalable processes</li>
           </ul>
         </div>
 
         <div class="card hoverlift">
           <h3 class="card-h">CUBIO Innovation Hub • Business Strategy Consulting Intern</h3>
           <p class="card-p">
-            Strategy consulting-style engagement: research, synthesis, and recommendations that are actually executable.
+            Strategy consulting-style engagement: research, synthesis, and recommendations that are executable.
           </p>
           <ul class="list">
-            <li>Worked in an 8-person team to build an executive-facing strategy deck</li>
-            <li>Converted messy inputs into clear deliverables and action steps</li>
+            <li>Worked in an 8-person team to build executive-facing deliverables</li>
+            <li>Converted messy inputs into clear action steps and strategy</li>
           </ul>
         </div>
 
@@ -265,36 +747,28 @@
           <p class="card-p">
             Built a practical AI moderation workflow with human-in-the-loop checkpoints — focused on scale and operational clarity.
           </p>
-
-          <div class="case-buttons">
+          <div class="case-buttons center">
             <button class="mini-btn" type="button" data-modal="meta">Open Meta AI Case Study</button>
-          </div>
-
-          <div class="pillrow">
-            <span class="tag">AI operations</span>
-            <span class="tag">Process design</span>
-            <span class="tag">Human in the loop</span>
           </div>
         </div>
 
         <div class="card hoverlift">
           <h3 class="card-h">Other Experience</h3>
           <ul class="list">
-            <li><strong>Sushi Masa</strong> • Server Team Leader (fast-paced team coordination)</li>
-            <li><strong>Kirkwood Washateria</strong> • General Manager (operations + process improvement)</li>
+            <li><strong>Sushi Masa</strong> • Server Team Leader</li>
+            <li><strong>Kirkwood Washateria</strong> • General Manager</li>
           </ul>
-          <p class="card-p subtle">
-            Those jobs taught me pace, ownership, and how to lead when it’s busy and nothing goes perfectly.
+          <p class="card-p" style="color: rgba(255,255,255,.64);">
+            Those roles taught me pace, ownership, and leadership when things get chaotic.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT -->
     <section id="contact" class="section reveal">
       <div class="section-top">
         <h2>Contact</h2>
-        <p class="section-note">If you’re hiring for tech consulting / risk / systems roles, I’d love to connect.</p>
+        <p class="section-note">Hiring for tech consulting / risk / systems roles? Let’s connect.</p>
       </div>
 
       <div class="grid2">
@@ -303,15 +777,15 @@
           <p class="card-p">
             <a class="link" href="mailto:BrandoonTran6006@gmail.com">BrandoonTran6006@gmail.com</a>
           </p>
-          <p class="card-p subtle">I usually reply same day.</p>
+          <p class="card-p" style="color: rgba(255,255,255,.64);">I usually reply same day.</p>
         </div>
 
         <div class="card hoverlift">
-          <h3 class="card-h">Links</h3>
+          <h3 class="card-h">Quick links</h3>
           <div class="pillrow">
-            <a class="tag linkbtn" href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
-            <a class="tag linkbtn" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-            <a class="tag linkbtn" href="#home">Back to top</a>
+            <a class="tag" href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+            <a class="tag" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="tag" href="#home">Back to top</a>
           </div>
         </div>
       </div>
@@ -334,6 +808,137 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const burger = document.getElementById("burger");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    burger?.addEventListener("click", () => {
+      mobileMenu.classList.toggle("open");
+    });
+
+    mobileMenu?.addEventListener("click", (e) => {
+      if (e.target.tagName === "A") mobileMenu.classList.remove("open");
+    });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("show");
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach((el) => io.observe(el));
+
+    // Modal content (high-level only; no internal screenshots)
+    const modal = document.getElementById("modal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalBody = document.getElementById("modalBody");
+
+    const modalContent = {
+      barcode: {
+        title: "Barcode Scanning + SAP (Endress+Hauser)",
+        body: `
+          <p>
+            This project focused on moving away from manual entry into a workflow that could scale.
+            I coordinated stakeholders across the Gas Measurement team and external software vendors, and I led meetings to keep
+            decisions moving and remove blockers.
+          </p>
+
+          <h3>My role</h3>
+          <ul>
+            <li>Main point of contact between internal stakeholders and vendors</li>
+            <li>Coordinated and led vendor meetings to align requirements and timelines</li>
+            <li>Supported SAP-adjacent workflow improvements to streamline fulfillment</li>
+          </ul>
+
+          <h3>Results</h3>
+          <ul>
+            <li>Eliminated 75% of manual data entry</li>
+            <li>Accelerated fulfillment speed by 40%</li>
+            <li>Drove three division-wide process enhancements</li>
+          </ul>
+        `
+      },
+
+      expedited: {
+        title: "Expedited Orders Analytics (Endress+Hauser)",
+        body: `
+          <p>
+            I analyzed expedited order trends to understand what was driving urgency and where the process was breaking down.
+            The goal was to help production treat expedites as exceptions, not the default.
+          </p>
+
+          <h3>What I did</h3>
+          <ul>
+            <li>Analyzed 120,000+ order records to identify bottlenecks and root causes</li>
+            <li>Built automated dashboards using Excel VBA and Power BI</li>
+            <li>Created reporting leaders could use for planning and prioritization</li>
+          </ul>
+
+          <h3>Results</h3>
+          <ul>
+            <li>Reduced urgent requests by 25%</li>
+            <li>Increased throughput by 15%</li>
+            <li>Cut reporting time by 40%</li>
+          </ul>
+        `
+      },
+
+      meta: {
+        title: "Meta AI Case Project (Business Planning Consultant)",
+        body: `
+          <p>
+            Built an AI moderation workflow with human-in-the-loop checkpoints. The focus was scale, consistent decisioning,
+            and clear ownership of edge cases.
+          </p>
+
+          <h3>What we built</h3>
+          <ul>
+            <li>AI-driven moderation workflow with human validation at key points</li>
+            <li>Operating model focused on scale, consistency, and accountability</li>
+            <li>Recommendations structured for pilot-to-scale rollout</li>
+          </ul>
+
+          <h3>Projected impact</h3>
+          <ul>
+            <li>Reduced content backlog by 20% across five pilot teams</li>
+            <li>Projected 12% reduction in review costs</li>
+            <li>Projected 30% improvement in moderation efficiency</li>
+          </ul>
+        `
+      }
+    };
+
+    function openModal(key) {
+      const content = modalContent[key];
+      if (!content) return;
+
+      modalTitle.textContent = content.title;
+      modalBody.innerHTML = content.body;
+
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-modal]");
+      if (btn) openModal(btn.getAttribute("data-modal"));
+
+      if (e.target.matches("[data-close]")) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
+    });
+  </script>
 </body>
 </html>
