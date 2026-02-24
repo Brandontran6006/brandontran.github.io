@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Brandon Tran | Tech Risk & Systems Strategy</title>
-
+  <title>Brandon Tran | Tech Risk, ERP, Analytics</title>
+  <meta name="description" content="Brandon Tran — Technology Risk, ERP workflows, and analytics. Portfolio and highlights." />
   <link rel="stylesheet" href="styles.css" />
-  <meta name="description" content="Brandon Tran — Technology Risk, ERP systems, and operational strategy. Consulting-style portfolio." />
 </head>
 
 <body>
@@ -26,68 +25,66 @@
       </a>
 
       <nav class="nav-links" aria-label="Primary navigation">
-        <button class="tab active" data-modal="home">Home</button>
-        <button class="tab" data-modal="about">About</button>
-        <button class="tab" data-modal="skills">Skills</button>
-        <button class="tab" data-modal="works">Works</button>
-        <button class="tab" data-modal="contact">Contact</button>
-
+        <button class="tab active" data-modal="home" type="button">Home</button>
+        <button class="tab" data-modal="about" type="button">About</button>
+        <button class="tab" data-modal="skills" type="button">Skills</button>
+        <button class="tab" data-modal="works" type="button">Works</button>
+        <button class="tab" data-modal="contact" type="button">Contact</button>
         <div class="tab-underline" aria-hidden="true"></div>
       </nav>
 
-      <button class="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
+      <button class="menu-btn" aria-label="Open menu" aria-expanded="false" type="button">☰</button>
     </div>
 
     <!-- Mobile drawer -->
     <div class="mobile-drawer" aria-hidden="true">
-      <button class="drawer-link" data-modal="home">Home</button>
-      <button class="drawer-link" data-modal="about">About</button>
-      <button class="drawer-link" data-modal="skills">Skills</button>
-      <button class="drawer-link" data-modal="works">Works</button>
-      <button class="drawer-link" data-modal="contact">Contact</button>
+      <button class="drawer-link" data-modal="home" type="button">Home</button>
+      <button class="drawer-link" data-modal="about" type="button">About</button>
+      <button class="drawer-link" data-modal="skills" type="button">Skills</button>
+      <button class="drawer-link" data-modal="works" type="button">Works</button>
+      <button class="drawer-link" data-modal="contact" type="button">Contact</button>
 
       <a class="drawer-cta" href="resume.pdf" target="_blank" rel="noopener">Download Resume</a>
     </div>
   </header>
 
-  <!-- Hero -->
   <main class="container">
+    <!-- Hero -->
     <section class="hero reveal">
       <div class="hero-left">
-        <p class="chip">University of Houston • MIS & Marketing • GPA 3.97</p>
+        <p class="chip">University of Houston • MIS & Marketing • 3.97 GPA</p>
 
         <h1 class="headline">
-          Technology Risk
-          <span class="sep">•</span>
-          ERP Systems
-          <span class="sep">•</span>
-          Operational Strategy
+          Tech Risk + ERP Workflows <span class="sep">•</span> Analytics that actually ships
         </h1>
 
         <p class="subhead">
-          I connect enterprise technology with business operations — blending controls, process, analytics, and
-          stakeholder management across manufacturing and consulting environments.
+          I like work where you have to connect the dots — people, process, systems — and still deliver something measurable.
+          I’ve led vendor + stakeholder meetings on an SAP barcode rollout, built dashboards leaders actually use,
+          and I’m heading into Technology Risk Consulting at RSM.
         </p>
 
         <div class="hero-cta">
           <a class="btn primary" href="resume.pdf" target="_blank" rel="noopener">
-            Download Resume
+            Resume
             <span class="btn-glow" aria-hidden="true"></span>
           </a>
           <a class="btn ghost" href="https://linkedin.com/in/btran123" target="_blank" rel="noopener">
             LinkedIn
           </a>
-          <button class="btn ghost" id="openWorks">View Highlights</button>
+          <a class="btn ghost" href="mailto:BrandoonTran6006@gmail.com">
+            Email
+          </a>
         </div>
 
         <div class="stats">
           <div class="stat">
             <div class="stat-num">120K+</div>
-            <div class="stat-label">Orders analyzed</div>
+            <div class="stat-label">Order records analyzed</div>
           </div>
           <div class="stat">
             <div class="stat-num">25%</div>
-            <div class="stat-label">Fewer expedited orders</div>
+            <div class="stat-label">Fewer expedited requests</div>
           </div>
           <div class="stat">
             <div class="stat-num">40%</div>
@@ -98,57 +95,60 @@
 
       <aside class="hero-card reveal">
         <div class="avatar-wrap">
-          <!-- Optional: replace with your headshot (headshot.jpg in repo) -->
-          <!-- <img class="avatar" src="headshot.jpg" alt="Brandon Tran headshot" /> -->
-          <div class="avatar-fallback" aria-hidden="true">BT</div>
+          <img class="avatar" src="headshot.jpg" alt="Brandon Tran headshot" />
           <div class="avatar-blob" aria-hidden="true"></div>
         </div>
 
-        <div class="card-title">Quick Snapshot</div>
+        <div class="card-title">Quick snapshot</div>
         <ul class="snap">
           <li><strong>RSM</strong> — Incoming Technology Risk Consulting Intern</li>
-          <li><strong>Endress+Hauser</strong> — Business Systems Analyst Intern (SAP + automation)</li>
+          <li><strong>Endress+Hauser</strong> — Systems + analytics (SAP, Power BI, VBA)</li>
           <li><strong>CUBIO</strong> — Strategy consulting engagement</li>
-          <li><strong>Sushi Masa</strong> — Server Team Leader</li>
-          <li><strong>Kirkwood Washateria</strong> — General Manager</li>
+          <li><strong>Leadership</strong> — Team lead + operations manager experience</li>
         </ul>
 
-        <div class="mini-actions">
-          <button class="mini-btn" data-modal="about">About</button>
-          <button class="mini-btn" data-modal="skills">Skills</button>
-          <button class="mini-btn" data-modal="works">Works</button>
+        <div class="micro">
+          <span class="micro-pill">ITGC / SOX</span>
+          <span class="micro-pill">SAP</span>
+          <span class="micro-pill">Power BI</span>
+          <span class="micro-pill">SQL</span>
         </div>
       </aside>
     </section>
 
-    <!-- Fancy “feature cards” -->
+    <!-- Feature cards (no repetitive buttons) -->
     <section class="grid3">
       <article class="card reveal hoverlift">
         <div class="card-icon">🧩</div>
-        <h2 class="card-h">Systems & Process</h2>
-        <p class="card-p">ERP/SAP workflows, vendor coordination, requirement tracking, rollout support.</p>
-        <button class="card-link" data-modal="works">See work</button>
+        <h2 class="card-h">Systems & delivery</h2>
+        <p class="card-p">
+          I’m comfortable leading meetings, documenting requirements, aligning stakeholders, and keeping projects moving
+          when there are vendors involved and the scope is messy.
+        </p>
       </article>
 
       <article class="card reveal hoverlift">
         <div class="card-icon">📊</div>
-        <h2 class="card-h">Analytics & Automation</h2>
-        <p class="card-p">Power BI + Excel VBA dashboards that cut reporting time and improve decision speed.</p>
-        <button class="card-link" data-modal="skills">Tool stack</button>
+        <h2 class="card-h">Analytics with outcomes</h2>
+        <p class="card-p">
+          Dashboards only matter if people use them. I focus on building reporting that’s fast, clear, and tied to decisions.
+        </p>
       </article>
 
       <article class="card reveal hoverlift">
         <div class="card-icon">🛡️</div>
-        <h2 class="card-h">Technology Risk</h2>
-        <p class="card-p">ITGC / SOX / governance and controls mindset built for consulting environments.</p>
-        <button class="card-link" data-modal="about">More</button>
+        <h2 class="card-h">Risk mindset</h2>
+        <p class="card-p">
+          I like controls work because it forces clean thinking: what can go wrong, how do we prove it’s working,
+          and how do we communicate it clearly to leadership?
+        </p>
       </article>
     </section>
 
     <footer class="footer reveal">
       <div class="footer-left">
-        <div class="footer-title">Let’s connect</div>
-        <div class="footer-sub">Open to Technology Risk / Tech Consulting / Business Analyst roles.</div>
+        <div class="footer-title">Want the short version?</div>
+        <div class="footer-sub">Use the tabs (About / Skills / Works) — they open quick popups with the good stuff.</div>
       </div>
       <div class="footer-right">
         <a class="pill-link" href="mailto:BrandoonTran6006@gmail.com">Email</a>
@@ -164,7 +164,7 @@
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
     <div class="modal-top">
       <div class="modal-title" id="modalTitle">Title</div>
-      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <button class="modal-close" id="modalClose" aria-label="Close" type="button">✕</button>
     </div>
     <div class="modal-body" id="modalBody"></div>
   </div>
