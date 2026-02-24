@@ -1,6 +1,6 @@
-// ---------- NAV underline + active tab ----------
 const tabs = Array.from(document.querySelectorAll(".tab"));
 const underline = document.querySelector(".tab-underline");
+
 const modal = document.getElementById("modal");
 const modalOverlay = document.getElementById("modalOverlay");
 const modalTitle = document.getElementById("modalTitle");
@@ -30,64 +30,74 @@ window.addEventListener("load", () => {
   moveUnderlineTo(active);
 });
 
-// ---------- Reveal on scroll ----------
+// Reveal on scroll
 const reveals = Array.from(document.querySelectorAll(".reveal"));
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) e.target.classList.add("in");
   });
 }, { threshold: 0.12 });
-
 reveals.forEach(el => io.observe(el));
 
-// ---------- Modal content ----------
+// Modal content (rewritten to sound real, not template-y)
 const modalContent = {
   home: {
     title: "Home",
     body: `
-      <h3>Quick intro</h3>
-      <p>I’m Brandon Tran — focused on Technology Risk, ERP-enabled process improvement, and analytics.</p>
+      <p>
+        Here’s the quick version: I’m focused on <strong>Technology Risk</strong>, <strong>ERP workflows</strong>, and
+        <strong>analytics that drive decisions</strong>.
+      </p>
       <div class="pillrow">
-        <span class="pill">Technology Risk</span>
-        <span class="pill">SAP / ERP</span>
+        <span class="pill">ITGC / SOX</span>
+        <span class="pill">SAP</span>
         <span class="pill">Power BI</span>
         <span class="pill">Excel VBA</span>
         <span class="pill">SQL</span>
       </div>
-      <p>Use the tabs to view details (About, Skills, Works), or hit Contact to reach me fast.</p>
+      <p>
+        If you only click one thing, click <strong>Works</strong> — it’s the best snapshot of how I operate.
+      </p>
     `
   },
+
   about: {
     title: "About",
     body: `
-      <h3>What I’m about</h3>
       <p>
-        I’m a University of Houston student (MIS & Marketing, 3.97 GPA) with experience across technology risk,
-        business systems, and strategy. I like projects where you have to connect people + process + systems
-        and still deliver something measurable.
+        I’m Brandon — I like being the person who can translate between the business side and the technical side.
+        Not just “analysis,” but actually pushing projects forward: running meetings, aligning stakeholders,
+        documenting requirements, and shipping improvements.
       </p>
 
-      <h3>Why consulting / tech risk</h3>
+      <h3>What you’ll notice in how I work</h3>
       <ul>
-        <li>Controls + governance mindset (ITGC / SOX / audit-readiness exposure)</li>
-        <li>Strong stakeholder management (cross-functional + vendors)</li>
-        <li>Data-driven execution (dashboards, automation, analytics)</li>
+        <li><strong>I take ownership.</strong> If something is unclear, I drive it to clarity (scope, requirements, next steps).</li>
+        <li><strong>I communicate clean.</strong> Leaders don’t want noise — they want a clear status + what decisions are needed.</li>
+        <li><strong>I care about measurable impact.</strong> Speed, accuracy, throughput, fewer errors — something you can point to.</li>
       </ul>
+
+      <h3>Why Technology Risk</h3>
+      <p>
+        I like the controls mindset because it’s structured: what can fail, what evidence proves it’s working,
+        and how do we explain it in a way that stands up to scrutiny.
+      </p>
     `
   },
+
   skills: {
     title: "Skills",
     body: `
-      <h3>Technical</h3>
+      <h3>Tools I’m comfortable with</h3>
       <div class="pillrow">
-        <span class="pill">SAP (ERP workflow)</span>
+        <span class="pill">SAP (workflow)</span>
         <span class="pill">Power BI</span>
         <span class="pill">Excel VBA</span>
         <span class="pill">SQL</span>
         <span class="pill">Data visualization</span>
       </div>
 
-      <h3>Risk / consulting</h3>
+      <h3>Risk / governance foundation</h3>
       <div class="pillrow">
         <span class="pill">ITGC</span>
         <span class="pill">SOX 404</span>
@@ -96,38 +106,39 @@ const modalContent = {
         <span class="pill">Control testing</span>
       </div>
 
-      <h3>Strengths</h3>
+      <h3>What people usually rely on me for</h3>
       <ul>
-        <li>Leading meetings + driving decisions</li>
-        <li>Process mapping + requirement tracking</li>
-        <li>Clear communication (exec-ready updates)</li>
+        <li>Leading meetings and keeping cross-functional work on track</li>
+        <li>Taking messy processes and turning them into something executable</li>
+        <li>Building dashboards that are simple, fast, and decision-ready</li>
       </ul>
     `
   },
+
   works: {
     title: "Works",
     body: `
-      <h3>Endress+Hauser — Barcode Scanning Implementation (SAP)</h3>
+      <h3>Endress+Hauser — SAP barcode scanning rollout</h3>
       <ul>
-        <li>Led meetings across operations + vendors; served as point of contact and kept the rollout moving</li>
-        <li>Integrated barcode workflows with SAP to reduce manual data entry and speed up fulfillment</li>
-        <li>Outcome: faster processing + less manual rework (your site headline shows the metrics)</li>
+        <li>Owned coordination across operations + vendors and ran the working meetings</li>
+        <li>Tracked requirements, aligned stakeholders, and drove the rollout forward</li>
+        <li>Integrated barcode workflows with SAP to cut manual entry and speed fulfillment</li>
       </ul>
 
-      <h3>Endress+Hauser — Expedited Orders Analytics</h3>
+      <h3>Endress+Hauser — expedited orders analytics</h3>
       <ul>
-        <li>Analyzed 120,000+ expedited order records to identify bottlenecks</li>
-        <li>Engineered solutions that reduced expedited orders and improved throughput</li>
+        <li>Analyzed <strong>120,000+</strong> order records to find bottlenecks</li>
+        <li>Helped reduce expedited requests by <strong>25%</strong> and increase throughput by <strong>15%</strong></li>
       </ul>
 
       <h3>RSM — Technology Risk Consulting (Incoming)</h3>
       <ul>
-        <li>Will support IT audit, SOX, and SOC engagements; focus on ITGC + ERP environments</li>
+        <li>Supporting IT audit / SOX / SOC work with a focus on ITGC and ERP environments</li>
       </ul>
 
-      <h3>Meta Case (Houston) — AI Moderation Strategy</h3>
+      <h3>CUBIO — strategy consulting engagement</h3>
       <ul>
-        <li>Designed human-in-the-loop moderation concept to reduce backlog + increase efficiency</li>
+        <li>Worked on a team consulting engagement delivering research + recommendations to leadership</li>
       </ul>
 
       <div class="cta-row">
@@ -136,17 +147,17 @@ const modalContent = {
       </div>
     `
   },
+
   contact: {
     title: "Contact",
     body: `
-      <h3>Reach me fast</h3>
+      <p>If you’re reaching out about internships, tech risk, or business analyst roles — I’m easy to reach.</p>
       <p><strong>Email:</strong> <a href="mailto:BrandoonTran6006@gmail.com">BrandoonTran6006@gmail.com</a></p>
       <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/btran123" target="_blank" rel="noopener">linkedin.com/in/btran123</a></p>
-      <p><strong>Resume:</strong> <a href="resume.pdf" target="_blank" rel="noopener">Open PDF</a></p>
 
       <div class="cta-row">
         <a href="mailto:BrandoonTran6006@gmail.com">Email me</a>
-        <a href="resume.pdf" target="_blank" rel="noopener">Download resume</a>
+        <a href="resume.pdf" target="_blank" rel="noopener">Open resume</a>
       </div>
     `
   }
@@ -179,21 +190,13 @@ tabs.forEach(tab => {
   });
 });
 
-document.querySelectorAll("[data-modal]").forEach(btn => {
-  // This includes mini buttons and card links
-  if (btn.classList.contains("tab")) return;
-  btn.addEventListener("click", () => openModal(btn.dataset.modal));
-});
-
-document.getElementById("openWorks")?.addEventListener("click", () => openModal("works"));
-
 modalClose.addEventListener("click", closeModal);
 modalOverlay.addEventListener("click", closeModal);
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeModal();
 });
 
-// ---------- Mobile drawer ----------
+// Mobile drawer
 menuBtn.addEventListener("click", () => {
   const isOpen = mobileDrawer.classList.toggle("show");
   menuBtn.setAttribute("aria-expanded", String(isOpen));
@@ -207,7 +210,6 @@ drawerLinks.forEach(link => {
     menuBtn.setAttribute("aria-expanded", "false");
     mobileDrawer.setAttribute("aria-hidden", "true");
 
-    // also sync active tab underline
     const match = tabs.find(t => t.dataset.modal === link.dataset.modal);
     if (match) setActive(match);
   });
