@@ -1,15 +1,9 @@
-const tabs = Array.from(document.querySelectorAll(".tab"));
-const underline = document.querySelector(".tab-underline");
-
-const modal = document.getElementById("modal");
-const modalOverlay = document.getElementById("modalOverlay");
-const modalTitle = document.getElementById("modalTitle");
-const modalBody = document.getElementById("modalBody");
-const modalClose = document.getElementById("modalClose");
-
 const menuBtn = document.querySelector(".menu-btn");
 const mobileDrawer = document.querySelector(".mobile-drawer");
-const drawerLinks = Array.from(document.querySelectorAll(".drawer-link"));
+
+// Nav underline animation
+const tabs = Array.from(document.querySelectorAll(".nav-links .tab"));
+const underline = document.querySelector(".tab-underline");
 
 function moveUnderlineTo(el) {
   if (!underline || !el) return;
@@ -19,145 +13,141 @@ function moveUnderlineTo(el) {
   underline.style.left = `${rect.left - parentRect.left}px`;
 }
 
-function setActive(el) {
+function setActiveByHash() {
+  const hash = window.location.hash || "#home";
+  const match = tabs.find(a => a.getAttribute("href") === hash) || tabs[0];
+
   tabs.forEach(t => t.classList.remove("active"));
-  el.classList.add("active");
-  moveUnderlineTo(el);
+  match.classList.add("active");
+  moveUnderlineTo(match);
 }
 
 window.addEventListener("load", () => {
-  const active = document.querySelector(".tab.active") || tabs[0];
-  moveUnderlineTo(active);
+  setActiveByHash();
+  document.getElementById("year").textContent = new Date().getFullYear();
 });
+window.addEventListener("hashchange", setActiveByHash);
+window.addEventListener("resize", setActiveByHash);
+
+tabs.forEach(t => t.addEventListener("click", () => {
+  tabs.forEach(x => x.classList.remove("active"));
+  t.classList.add("active");
+  moveUnderlineTo(t);
+}));
 
 // Reveal on scroll
 const reveals = Array.from(document.querySelectorAll(".reveal"));
 const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) e.target.classList.add("in");
-  });
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("in"); });
 }, { threshold: 0.12 });
 reveals.forEach(el => io.observe(el));
 
-// Modal content (rewritten to sound real, not template-y)
+// Mobile drawer
+menuBtn.addEventListener("click", () => {
+  const isOpen = mobileDrawer.classList.toggle("show");
+  menuBtn.setAttribute("aria-expanded", String(isOpen));
+  mobileDrawer.setAttribute("aria-hidden", String(!isOpen));
+});
+
+// Close drawer when clicking a link
+document.querySelectorAll(".drawer-link").forEach(link => {
+  link.addEventListener("click", () => {
+    mobileDrawer.classList.remove("show");
+    menuBtn.setAttribute("aria-expanded", "false");
+    mobileDrawer.setAttribute("aria-hidden", "true");
+  });
+});
+
+// Modal (for “Read more” buttons only)
+const modal = document.getElementById("modal");
+const modalOverlay = document.getElementById("modalOverlay");
+const modalTitle = document.getElementById("modalTitle");
+const modalBody = document.getElementById("modalBody");
+const modalClose = document.getElementById("modalClose");
+
 const modalContent = {
-  home: {
-    title: "Home",
-    body: `
-      <p>
-        Here’s the quick version: I’m focused on <strong>Technology Risk</strong>, <strong>ERP workflows</strong>, and
-        <strong>analytics that drive decisions</strong>.
-      </p>
-      <div class="pillrow">
-        <span class="pill">ITGC / SOX</span>
-        <span class="pill">SAP</span>
-        <span class="pill">Power BI</span>
-        <span class="pill">Excel VBA</span>
-        <span class="pill">SQL</span>
-      </div>
-      <p>
-        If you only click one thing, click <strong>Works</strong> — it’s the best snapshot of how I operate.
-      </p>
-    `
-  },
-
   about: {
-    title: "About",
+    title: "About (full)",
     body: `
       <p>
-        I’m Brandon — I like being the person who can translate between the business side and the technical side.
-        Not just “analysis,” but actually pushing projects forward: running meetings, aligning stakeholders,
-        documenting requirements, and shipping improvements.
+        I’m Brandon. I’m really into work where you have to connect the dots between people, process, and systems.
+        I don’t love “busywork” — I like ownership, clarity, and outcomes.
       </p>
 
-      <h3>What you’ll notice in how I work</h3>
+      <h3>What I’m good at</h3>
       <ul>
-        <li><strong>I take ownership.</strong> If something is unclear, I drive it to clarity (scope, requirements, next steps).</li>
-        <li><strong>I communicate clean.</strong> Leaders don’t want noise — they want a clear status + what decisions are needed.</li>
-        <li><strong>I care about measurable impact.</strong> Speed, accuracy, throughput, fewer errors — something you can point to.</li>
+        <li>Leading working sessions and keeping teams aligned on decisions and next steps</li>
+        <li>Taking unclear requirements and turning them into something executable</li>
+        <li>Building decision-ready reporting that leadership actually trusts</li>
       </ul>
 
-      <h3>Why Technology Risk</h3>
-      <p>
-        I like the controls mindset because it’s structured: what can fail, what evidence proves it’s working,
-        and how do we explain it in a way that stands up to scrutiny.
-      </p>
+      <h3>Outside of work</h3>
+      <ul>
+        <li>Mini roadtrips about twice a month</li>
+        <li>Pickleball and working out</li>
+        <li>Trying new food spots (I’m a big foodie)</li>
+      </ul>
     `
   },
-
   skills: {
-    title: "Skills",
+    title: "Skills (detail)",
     body: `
-      <h3>Tools I’m comfortable with</h3>
-      <div class="pillrow">
-        <span class="pill">SAP (workflow)</span>
-        <span class="pill">Power BI</span>
-        <span class="pill">Excel VBA</span>
-        <span class="pill">SQL</span>
-        <span class="pill">Data visualization</span>
-      </div>
-
-      <h3>Risk / governance foundation</h3>
-      <div class="pillrow">
-        <span class="pill">ITGC</span>
-        <span class="pill">SOX 404</span>
-        <span class="pill">NIST</span>
-        <span class="pill">COBIT</span>
-        <span class="pill">Control testing</span>
-      </div>
-
-      <h3>What people usually rely on me for</h3>
+      <h3>Systems and delivery</h3>
       <ul>
-        <li>Leading meetings and keeping cross-functional work on track</li>
-        <li>Taking messy processes and turning them into something executable</li>
-        <li>Building dashboards that are simple, fast, and decision-ready</li>
+        <li>SAP workflow thinking, rollout support, vendor coordination, requirements tracking</li>
+        <li>Stakeholder management and clear status communication</li>
+      </ul>
+
+      <h3>Analytics and automation</h3>
+      <ul>
+        <li>Power BI dashboards and KPI reporting</li>
+        <li>Excel automation (VBA), cleanup, and performance improvements</li>
+        <li>SQL foundations for querying and analysis</li>
+      </ul>
+
+      <h3>Technology Risk foundation</h3>
+      <ul>
+        <li>ITGC and SOX mindset; documenting and validating what “good” looks like</li>
+        <li>Interest in ERP controls, governance, and audit-ready processes</li>
       </ul>
     `
   },
-
   works: {
-    title: "Works",
+    title: "Works (highlights)",
     body: `
-      <h3>Endress+Hauser — SAP barcode scanning rollout</h3>
+      <h3>Endress+Hauser · Business Systems Analyst Intern</h3>
       <ul>
-        <li>Owned coordination across operations + vendors and ran the working meetings</li>
-        <li>Tracked requirements, aligned stakeholders, and drove the rollout forward</li>
-        <li>Integrated barcode workflows with SAP to cut manual entry and speed fulfillment</li>
+        <li>Led SAP-connected barcode scanning rollout with vendors and cross-functional stakeholders</li>
+        <li>Analyzed 120,000+ order records; reduced expedited requests by 25% and improved throughput by 15%</li>
+        <li>Built reporting that improved decision speed and visibility</li>
       </ul>
 
-      <h3>Endress+Hauser — expedited orders analytics</h3>
+      <h3>CUBIO Innovation Hub · Business Strategy Consulting Intern</h3>
       <ul>
-        <li>Analyzed <strong>120,000+</strong> order records to find bottlenecks</li>
-        <li>Helped reduce expedited requests by <strong>25%</strong> and increase throughput by <strong>15%</strong></li>
+        <li>Consulting-style engagement: research, synthesis, and leadership-ready recommendations</li>
+        <li>Worked on an 8-person team supporting growth and partnerships</li>
       </ul>
 
-      <h3>RSM — Technology Risk Consulting (Incoming)</h3>
+      <h3>RSM · Incoming Technology Risk Consulting Intern</h3>
       <ul>
-        <li>Supporting IT audit / SOX / SOC work with a focus on ITGC and ERP environments</li>
-      </ul>
-
-      <h3>CUBIO — strategy consulting engagement</h3>
-      <ul>
-        <li>Worked on a team consulting engagement delivering research + recommendations to leadership</li>
+        <li>Building depth in ITGC, SOX, and ERP control environments</li>
       </ul>
 
       <div class="cta-row">
         <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
-        <a href="https://linkedin.com/in/btran123" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:BrandoonTran6006@gmail.com">Email</a>
       </div>
     `
   },
-
   contact: {
     title: "Contact",
     body: `
-      <p>If you’re reaching out about internships, tech risk, or business analyst roles — I’m easy to reach.</p>
       <p><strong>Email:</strong> <a href="mailto:BrandoonTran6006@gmail.com">BrandoonTran6006@gmail.com</a></p>
       <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/btran123" target="_blank" rel="noopener">linkedin.com/in/btran123</a></p>
-
+      <p><strong>Resume:</strong> <a href="resume.pdf" target="_blank" rel="noopener">Open resume</a></p>
       <div class="cta-row">
         <a href="mailto:BrandoonTran6006@gmail.com">Email me</a>
-        <a href="resume.pdf" target="_blank" rel="noopener">Open resume</a>
+        <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
       </div>
     `
   }
@@ -166,10 +156,8 @@ const modalContent = {
 function openModal(key) {
   const content = modalContent[key];
   if (!content) return;
-
   modalTitle.textContent = content.title;
   modalBody.innerHTML = content.body;
-
   modal.classList.add("open");
   modalOverlay.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
@@ -183,34 +171,10 @@ function closeModal() {
   modalOverlay.setAttribute("aria-hidden", "true");
 }
 
-tabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    setActive(tab);
-    openModal(tab.dataset.modal);
-  });
+document.querySelectorAll("[data-modal]").forEach(btn => {
+  btn.addEventListener("click", () => openModal(btn.dataset.modal));
 });
 
 modalClose.addEventListener("click", closeModal);
 modalOverlay.addEventListener("click", closeModal);
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeModal();
-});
-
-// Mobile drawer
-menuBtn.addEventListener("click", () => {
-  const isOpen = mobileDrawer.classList.toggle("show");
-  menuBtn.setAttribute("aria-expanded", String(isOpen));
-  mobileDrawer.setAttribute("aria-hidden", String(!isOpen));
-});
-
-drawerLinks.forEach(link => {
-  link.addEventListener("click", () => {
-    openModal(link.dataset.modal);
-    mobileDrawer.classList.remove("show");
-    menuBtn.setAttribute("aria-expanded", "false");
-    mobileDrawer.setAttribute("aria-hidden", "true");
-
-    const match = tabs.find(t => t.dataset.modal === link.dataset.modal);
-    if (match) setActive(match);
-  });
-});
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
