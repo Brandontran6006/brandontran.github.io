@@ -9,9 +9,7 @@
     :root{
       --bg: #0b0f1a;
       --panel: rgba(255,255,255,.04);
-      --panel2: rgba(255,255,255,.06);
       --line: rgba(255,255,255,.10);
-      --line2: rgba(255,255,255,.14);
 
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.72);
@@ -46,7 +44,7 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: .12;
+      opacity: .10;
       background-image: radial-gradient(rgba(255,255,255,.16) 1px, transparent 1px);
       background-size: 22px 22px;
       mix-blend-mode: soft-light;
@@ -279,19 +277,6 @@
       overflow:hidden;
     }
 
-    .hero-card::before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      border-radius: var(--radius);
-      background: linear-gradient(135deg, rgba(110,120,255,.32), rgba(0,255,200,.18), rgba(255,255,255,0));
-      opacity: .35;
-      pointer-events:none;
-      mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
-      -webkit-mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
-      padding: 1px;
-    }
-
     .avatar{
       width: 260px;
       height: 260px;
@@ -400,7 +385,6 @@
                   radial-gradient(circle at 70% 70%, var(--glowB), transparent 60%);
       pointer-events:none;
       opacity:.55;
-      filter: blur(.2px);
     }
 
     .card-h{ margin: 0; font-size: 15px; font-weight: 1000; }
@@ -460,19 +444,18 @@
     .work-title{ margin-top: 6px; font-weight: 1100; font-size: 22px; letter-spacing: -0.3px; }
     .work-sub{ margin-top: 6px; color: rgba(255,255,255,.78); font-weight: 750; }
 
-    /* Case buttons */
+    /* buttons */
     .case-buttons{
-      display: flex;
+      display:flex;
       gap: 10px;
       flex-wrap: wrap;
       margin: 12px 0 10px;
       position: relative;
       z-index: 1;
     }
-
     .case-buttons.center{
       justify-content: center;
-      margin: 14px 0 0; /* fixes the "weird bottom gap" feeling */
+      margin: 12px 0 12px;
     }
 
     .mini-btn{
@@ -484,8 +467,7 @@
       font-weight: 950;
       cursor: pointer;
       transition: transform .18s ease, background .18s ease, border-color .18s ease;
-      text-decoration: none;
-      display: inline-flex;
+      display:inline-flex;
       align-items:center;
       gap: 8px;
     }
@@ -520,30 +502,27 @@
     }
     .footnote{ color: rgba(255,255,255,.55); }
 
-    /* Hover lift */
     .hoverlift{
       transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
-
     .hoverlift:hover{
       transform: translateY(-3px);
       box-shadow: 0 22px 90px rgba(0,0,0,.38);
       border-color: rgba(255,255,255,.16);
     }
 
-    /* Modal (flashier) */
+    /* Modal */
     .modal{
       position: fixed;
       inset: 0;
       display: none;
       z-index: 9999;
     }
-
-    .modal.open{ display: block; }
+    .modal.open{ display:block; }
 
     .modal-backdrop{
-      position: absolute;
-      inset: 0;
+      position:absolute;
+      inset:0;
       background: rgba(0,0,0,.62);
       backdrop-filter: blur(8px);
       animation: fadeIn .18s ease both;
@@ -562,7 +541,6 @@
       overflow:hidden;
     }
 
-    /* gradient rim */
     .modal-card::before{
       content:"";
       position:absolute;
@@ -582,7 +560,6 @@
       align-items:flex-start;
       justify-content: space-between;
       gap: 12px;
-      padding: 4px 2px 0;
       z-index: 1;
     }
 
@@ -614,7 +591,6 @@
       font-size: 18px;
       letter-spacing: -0.2px;
       font-weight: 1100;
-      position: relative;
       z-index: 1;
     }
 
@@ -685,33 +661,19 @@
       letter-spacing: -0.2px;
     }
 
-    @keyframes fadeIn{
-      from{ opacity: 0; }
-      to{ opacity: 1; }
-    }
+    @keyframes fadeIn{ from{opacity:0} to{opacity:1} }
+    @keyframes popIn{ from{ transform: translateY(10px) scale(.985); opacity:0 } to{ transform: translateY(0) scale(1); opacity:1 } }
 
-    @keyframes popIn{
-      from{ transform: translateY(10px) scale(.985); opacity: 0; }
-      to{ transform: translateY(0) scale(1); opacity: 1; }
-    }
-
-    /* Reveal animation */
     .reveal{
       opacity: 0;
       transform: translateY(14px);
       transition: opacity .6s ease, transform .6s ease;
     }
+    .reveal.show{ opacity:1; transform: translateY(0); }
 
-    .reveal.show{
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Responsive */
     @media (max-width: 980px){
       .links, .nav-cta{ display:none; }
       .burger{ display:block; }
-
       .hero{ grid-template-columns: 1fr; }
       .mini-row{ grid-template-columns: 1fr; }
       .grid2{ grid-template-columns: 1fr; }
@@ -732,7 +694,7 @@
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
-        <a href="#works">Works</a>
+        <a href="#works">Projects</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -750,7 +712,7 @@
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
-      <a href="#works">Works</a>
+      <a href="#works">Projects</a>
       <a href="#contact">Contact</a>
       <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
     </div>
@@ -964,7 +926,6 @@
           </div>
         </div>
 
-        <!-- META (fixed spacing + centered button row) -->
         <div class="card hoverlift">
           <h3 class="card-h">Meta • Business Planning Consultant (AI Case Project)</h3>
           <p class="card-p">
@@ -975,7 +936,6 @@
             <button class="mini-btn" type="button" data-modal="meta">Open project</button>
           </div>
 
-          <!-- added tag row so the card doesn't feel like it has an awkward bottom gap -->
           <div class="pillrow">
             <span class="tag">Ops model</span>
             <span class="tag">Human-in-loop</span>
@@ -983,7 +943,6 @@
           </div>
         </div>
 
-        <!-- Tran Web Advisory (fixed: remove resume button + rename to Open project) -->
         <div class="card hoverlift">
           <h3 class="card-h">Tran Web Advisory • Client Portfolio Websites</h3>
           <p class="card-p">
@@ -1072,17 +1031,13 @@
   </div>
 
   <script>
-    // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Mobile menu toggle
+    // Mobile menu
     const burger = document.getElementById("burger");
     const mobileMenu = document.getElementById("mobileMenu");
 
-    burger?.addEventListener("click", () => {
-      mobileMenu.classList.toggle("open");
-    });
-
+    burger?.addEventListener("click", () => mobileMenu.classList.toggle("open"));
     mobileMenu?.addEventListener("click", (e) => {
       if (e.target.tagName === "A") mobileMenu.classList.remove("open");
     });
@@ -1096,7 +1051,7 @@
     }, { threshold: 0.12 });
     reveals.forEach((el) => io.observe(el));
 
-    // Modal content
+    // Modal logic
     const modal = document.getElementById("modal");
     const modalTitle = document.getElementById("modalTitle");
     const modalBody = document.getElementById("modalBody");
@@ -1112,18 +1067,9 @@
           </p>
 
           <div class="stat-row">
-            <div class="stat">
-              <div class="stat-top">Manual entry</div>
-              <div class="stat-big">↓ 75%</div>
-            </div>
-            <div class="stat">
-              <div class="stat-top">Fulfillment speed</div>
-              <div class="stat-big">↑ 40%</div>
-            </div>
-            <div class="stat">
-              <div class="stat-top">Process improvements</div>
-              <div class="stat-big">3 shipped</div>
-            </div>
+            <div class="stat"><div class="stat-top">Manual entry</div><div class="stat-big">↓ 75%</div></div>
+            <div class="stat"><div class="stat-top">Fulfillment speed</div><div class="stat-big">↑ 40%</div></div>
+            <div class="stat"><div class="stat-top">Improvements</div><div class="stat-big">3 shipped</div></div>
           </div>
 
           <h3>My role</h3>
@@ -1144,18 +1090,9 @@
           </p>
 
           <div class="stat-row">
-            <div class="stat">
-              <div class="stat-top">Records analyzed</div>
-              <div class="stat-big">120k+</div>
-            </div>
-            <div class="stat">
-              <div class="stat-top">Urgent requests</div>
-              <div class="stat-big">↓ 25%</div>
-            </div>
-            <div class="stat">
-              <div class="stat-top">Reporting time</div>
-              <div class="stat-big">↓ 40%</div>
-            </div>
+            <div class="stat"><div class="stat-top">Records analyzed</div><div class="stat-big">120k+</div></div>
+            <div class="stat"><div class="stat-top">Urgent requests</div><div class="stat-big">↓ 25%</div></div>
+            <div class="stat"><div class="stat-top">Reporting time</div><div class="stat-big">↓ 40%</div></div>
           </div>
 
           <h3>What I did</h3>
@@ -1176,18 +1113,9 @@
           </p>
 
           <div class="stat-row">
-            <div class="stat">
-              <div class="stat-top">Backlog</div>
-              <div class="stat-big">↓ 20%*</div>
-            </div>
-            <div class="stat">
-              <div class="stat-top">Review costs</div>
-              <div class="stat-big">↓ 12%*</div>
-            </div>
-            <div class="stat">
-              <div class="stat-top">Efficiency</div>
-              <div class="stat-big">↑ 30%*</div>
-            </div>
+            <div class="stat"><div class="stat-top">Backlog</div><div class="stat-big">↓ 20%*</div></div>
+            <div class="stat"><div class="stat-top">Review costs</div><div class="stat-big">↓ 12%*</div></div>
+            <div class="stat"><div class="stat-top">Efficiency</div><div class="stat-big">↑ 30%*</div></div>
           </div>
 
           <p style="margin-top:10px; color: rgba(255,255,255,.66); font-weight: 650;">
@@ -1212,37 +1140,24 @@
           </p>
 
           <div class="stat-row">
-            <div class="stat">
-              <div class="stat-top">Clients</div>
-              <div class="stat-big">4</div>
-            </div>
-            <div class="stat">
-              <div class="stat-top">Revenue</div>
-              <div class="stat-big">$450+</div>
-            </div>
-            <div class="stat">
-              <div class="stat-top">Delivery</div>
-              <div class="stat-big">GitHub Pages</div>
-            </div>
+            <div class="stat"><div class="stat-top">Clients</div><div class="stat-big">4</div></div>
+            <div class="stat"><div class="stat-top">Revenue</div><div class="stat-big">$450+</div></div>
+            <div class="stat"><div class="stat-top">Platform</div><div class="stat-big">GitHub Pages</div></div>
           </div>
 
-          <h3>XYZ bullets (real impact)</h3>
+          <h3>Highlights</h3>
           <ul>
-            <li><strong>Built</strong> and delivered <strong>4</strong> custom portfolio websites for paying clients, <strong>generating $450+ in revenue</strong> through repeatable structure + fast turnaround.</li>
-            <li><strong>Translated</strong> resumes into scannable site sections and project case studies, <strong>making content easier to skim</strong> with “what I did / results / tools” formatting.</li>
-            <li><strong>Shipped</strong> responsive GitHub Pages sites with polished UI details (spacing, typography, hover states), <strong>so pages feel modern</strong> instead of “student template.”</li>
+            <li><strong>Built</strong> and delivered <strong>4</strong> custom portfolio websites for paying clients, bringing in <strong>$450+ revenue</strong> through repeatable delivery.</li>
+            <li><strong>Translated</strong> resumes into scannable sections + project case studies, <strong>improving readability</strong> with “what I did / results / tools” formatting.</li>
+            <li><strong>Shipped</strong> responsive sites with clean UI polish (spacing, typography, hover states) so pages feel <strong>modern</strong> instead of templated.</li>
           </ul>
 
           <h3>Client example (Katherine)</h3>
           <p style="margin: 0; color: rgba(255,255,255,.70); font-weight: 650;">
-            Pastel theme + bento layout + interactive case study (screenshot).
+            Pastel theme + bento layout + interactive case study.
           </p>
 
-          <!-- IMPORTANT: per your file name -->
-          <img src="./katherine-client" alt="Client website example screenshot" />
-          <p style="margin-top:10px; color: rgba(255,255,255,.60); font-weight: 650;">
-            Tip: GitHub Pages is case-sensitive — the filename must match exactly (including extension if you have one).
-          </p>
+          <img src="./katherine-client.jpeg" alt="Katherine client website screenshot" />
         `
       }
     };
@@ -1250,10 +1165,8 @@
     function openModal(key) {
       const content = modalContent[key];
       if (!content) return;
-
       modalTitle.textContent = content.title;
       modalBody.innerHTML = content.body;
-
       modal.classList.add("open");
       document.body.style.overflow = "hidden";
     }
@@ -1266,10 +1179,9 @@
     document.addEventListener("click", (e) => {
       const btn = e.target.closest("[data-modal]");
       if (btn) openModal(btn.getAttribute("data-modal"));
-
       if (e.target.matches("[data-close]")) closeModal();
 
-      // click image in modal -> open in new tab (flashy + useful)
+      // click image inside modal => open full size
       const img = e.target.closest(".modal-body img");
       if (img) window.open(img.getAttribute("src"), "_blank", "noopener");
     });
