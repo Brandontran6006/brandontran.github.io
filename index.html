@@ -384,6 +384,8 @@
       font-weight: 900;
       cursor: pointer;
       transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .mini-btn:hover{
@@ -475,6 +477,15 @@
     .modal-body ul{
       margin: 8px 0 0 18px;
       color: rgba(255,255,255,.80);
+    }
+
+    .modal-body img{
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      margin-top: 10px;
+      display:block;
     }
 
     @keyframes fadeIn{
@@ -684,7 +695,7 @@
 
     <section id="works" class="section reveal">
       <div class="section-top">
-        <h2>Works</h2>
+        <h2>Projects</h2>
         <p class="section-note">Case studies open in popups.</p>
       </div>
 
@@ -749,6 +760,27 @@
           </p>
           <div class="case-buttons center">
             <button class="mini-btn" type="button" data-modal="meta">Open Meta AI Case Study</button>
+          </div>
+        </div>
+
+        <!-- NEW: Tran Web Advisory -->
+        <div class="card hoverlift">
+          <h3 class="card-h">Tran Web Advisory • Client Portfolio Websites</h3>
+          <p class="card-p">
+            I build clean portfolio sites for students and early-career professionals — fast, modern, and easy to maintain on GitHub Pages.
+            So far: 4 clients, $450+ revenue.
+          </p>
+
+          <div class="case-buttons">
+            <button class="mini-btn" type="button" data-modal="tranweb">Open case study</button>
+            <a class="mini-btn" href="resume.pdf" target="_blank" rel="noopener">Open my resume</a>
+          </div>
+
+          <div class="pillrow">
+            <span class="tag">HTML/CSS/JS</span>
+            <span class="tag">GitHub Pages</span>
+            <span class="tag">UI polish</span>
+            <span class="tag">Client delivery</span>
           </div>
         </div>
 
@@ -833,7 +865,7 @@
     }, { threshold: 0.12 });
     reveals.forEach((el) => io.observe(el));
 
-    // Modal content (high-level only; no internal screenshots)
+    // Modal content
     const modal = document.getElementById("modal");
     const modalTitle = document.getElementById("modalTitle");
     const modalBody = document.getElementById("modalBody");
@@ -909,6 +941,37 @@
             <li>Projected 12% reduction in review costs</li>
             <li>Projected 30% improvement in moderation efficiency</li>
           </ul>
+        `
+      },
+
+      // NEW: Tran Web Advisory popup
+      tranweb: {
+        title: "Tran Web Advisory — Client Portfolio Websites",
+        body: `
+          <p>
+            I started <strong>Tran Web Advisory</strong> to build modern portfolio websites for students and early-career professionals.
+            I handle the full build end-to-end — layout, copy flow, implementation, and GitHub Pages deployment.
+          </p>
+
+          <h3>Snapshot</h3>
+          <ul>
+            <li><strong>4 clients</strong> delivered</li>
+            <li><strong>$450+ revenue</strong> earned from paid builds</li>
+            <li>Stack: HTML/CSS/JS + GitHub Pages</li>
+          </ul>
+
+          <h3>XYZ bullets (real impact)</h3>
+          <ul>
+            <li><strong>Built</strong> and delivered <strong>4</strong> custom portfolio websites for paying clients, <strong>generating $450+ in revenue</strong> through repeatable structure + fast turnaround.</li>
+            <li><strong>Translated</strong> resumes into scannable site sections and project case studies, <strong>making content easier to skim</strong> with “what I did / results / tools” formatting.</li>
+            <li><strong>Shipped</strong> responsive GitHub Pages sites with polished UI details (spacing, typography, hover states), <strong>so pages feel modern</strong> instead of “student template.”</li>
+          </ul>
+
+          <h3>Client example</h3>
+          <p style="margin: 0; color: rgba(255,255,255,.72); font-weight: 650;">
+            Pastel theme + bento layout + interactive case study (screenshot).
+          </p>
+          <img src="katherine-client.jpg" alt="Client website example screenshot" />
         `
       }
     };
