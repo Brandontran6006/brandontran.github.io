@@ -9,23 +9,49 @@
     :root{
       --bg: #0b0f1a;
       --panel: rgba(255,255,255,.04);
+      --panel2: rgba(255,255,255,.06);
       --line: rgba(255,255,255,.10);
+      --line2: rgba(255,255,255,.14);
+
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.72);
       --muted2: rgba(255,255,255,.55);
+
       --radius: 18px;
+
+      --a: rgba(110,120,255,1);
+      --b: rgba(0,255,200,1);
+      --glowA: rgba(110,120,255,.22);
+      --glowB: rgba(0,255,200,.14);
     }
 
     *{ box-sizing: border-box; }
     html{ scroll-behavior: smooth; }
+
     body{
       margin: 0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background: radial-gradient(1200px 600px at 20% 10%, rgba(110,120,255,.18), transparent 60%),
-                  radial-gradient(900px 500px at 85% 20%, rgba(0,255,200,.10), transparent 55%),
-                  var(--bg);
+      background:
+        radial-gradient(1200px 600px at 18% 10%, rgba(110,120,255,.22), transparent 60%),
+        radial-gradient(900px 500px at 85% 18%, rgba(0,255,200,.12), transparent 55%),
+        radial-gradient(900px 500px at 20% 92%, rgba(0,255,200,.08), transparent 55%),
+        radial-gradient(900px 500px at 92% 90%, rgba(110,120,255,.12), transparent 60%),
+        var(--bg);
       color: var(--text);
     }
+
+    /* subtle grain */
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .12;
+      background-image: radial-gradient(rgba(255,255,255,.16) 1px, transparent 1px);
+      background-size: 22px 22px;
+      mix-blend-mode: soft-light;
+    }
+
     a{ color: inherit; text-decoration: none; }
     .container{ width: min(1100px, 92%); margin: 0 auto; }
 
@@ -34,8 +60,8 @@
       position: sticky;
       top: 0;
       z-index: 999;
-      background: rgba(11,15,26,.72);
-      backdrop-filter: blur(14px);
+      background: rgba(11,15,26,.74);
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
 
@@ -48,8 +74,19 @@
     }
 
     .logo{
-      font-weight: 900;
+      font-weight: 950;
       letter-spacing: .2px;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+
+    .logo-dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--a), var(--b));
+      box-shadow: 0 0 0 6px rgba(255,255,255,.04), 0 18px 40px rgba(110,120,255,.18);
     }
 
     .links{
@@ -60,7 +97,7 @@
 
     .links a{
       color: rgba(255,255,255,.82);
-      font-weight: 800;
+      font-weight: 850;
       font-size: 13px;
       padding: 10px 10px;
       border-radius: 12px;
@@ -84,9 +121,10 @@
       border-radius: 14px;
       background: rgba(110,120,255,.95);
       color: white;
-      font-weight: 900;
+      font-weight: 950;
       border: 1px solid rgba(255,255,255,.12);
       transition: transform .18s ease, filter .18s ease;
+      box-shadow: 0 18px 60px rgba(110,120,255,.16);
     }
 
     .primary:hover{ transform: translateY(-2px); filter: brightness(1.05); }
@@ -98,7 +136,7 @@
       background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,255,255,.12);
       color: rgba(255,255,255,.90);
-      font-weight: 900;
+      font-weight: 950;
       transition: transform .18s ease, background .18s ease;
     }
 
@@ -124,12 +162,14 @@
       display:none;
       padding: 10px 4%;
       border-top: 1px solid rgba(255,255,255,.08);
+      background: rgba(11,15,26,.84);
+      backdrop-filter: blur(14px);
     }
     .mobile a{
       display:block;
       padding: 12px 10px;
       border-radius: 12px;
-      font-weight: 900;
+      font-weight: 950;
       color: rgba(255,255,255,.86);
     }
     .mobile a:hover{ background: rgba(255,255,255,.06); }
@@ -151,7 +191,7 @@
       background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,255,255,.12);
       color: rgba(255,255,255,.84);
-      font-weight: 900;
+      font-weight: 950;
       font-size: 13px;
     }
 
@@ -194,11 +234,26 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 14px;
+      position: relative;
+      overflow:hidden;
+    }
+
+    .mini-card::after{
+      content:"";
+      position:absolute;
+      right:-70px;
+      top:-70px;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(110,120,255,.22), transparent 60%),
+                  radial-gradient(circle at 70% 70%, rgba(0,255,200,.14), transparent 60%);
+      pointer-events:none;
     }
 
     .mini-top{
       color: var(--muted2);
-      font-weight: 900;
+      font-weight: 950;
       font-size: 12px;
     }
 
@@ -220,6 +275,21 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 18px;
+      position: relative;
+      overflow:hidden;
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(110,120,255,.32), rgba(0,255,200,.18), rgba(255,255,255,0));
+      opacity: .35;
+      pointer-events:none;
+      mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+      -webkit-mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+      padding: 1px;
     }
 
     .avatar{
@@ -258,8 +328,14 @@
       background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,255,255,.12);
       color: rgba(255,255,255,.86);
-      font-weight: 900;
+      font-weight: 950;
       font-size: 12px;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .tag:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.18);
     }
 
     .hero-links{
@@ -271,7 +347,7 @@
 
     .link{
       color: rgba(255,255,255,.86);
-      font-weight: 900;
+      font-weight: 950;
       border-bottom: 1px solid rgba(255,255,255,.22);
       padding-bottom: 2px;
     }
@@ -296,7 +372,7 @@
     .section-note{
       margin: 0;
       color: rgba(255,255,255,.70);
-      font-weight: 800;
+      font-weight: 850;
       font-size: 13px;
     }
 
@@ -308,6 +384,23 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 18px;
+      position: relative;
+      overflow:hidden;
+    }
+
+    .card::after{
+      content:"";
+      position:absolute;
+      left:-120px;
+      bottom:-140px;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, var(--glowA), transparent 60%),
+                  radial-gradient(circle at 70% 70%, var(--glowB), transparent 60%);
+      pointer-events:none;
+      opacity:.55;
+      filter: blur(.2px);
     }
 
     .card-h{ margin: 0; font-size: 15px; font-weight: 1000; }
@@ -317,6 +410,8 @@
       color: var(--muted);
       line-height: 1.6;
       font-weight: 650;
+      position: relative;
+      z-index: 1;
     }
 
     .list{
@@ -324,6 +419,8 @@
       color: rgba(255,255,255,.78);
       line-height: 1.65;
       font-weight: 650;
+      position: relative;
+      z-index: 1;
     }
 
     /* WORK BANNER */
@@ -349,7 +446,7 @@
     .work-banner-overlay{
       position:absolute;
       inset:0;
-      background: linear-gradient(90deg, rgba(11,15,26,.88), rgba(11,15,26,.25));
+      background: linear-gradient(90deg, rgba(11,15,26,.90), rgba(11,15,26,.28));
     }
 
     .work-banner-text{
@@ -369,10 +466,13 @@
       gap: 10px;
       flex-wrap: wrap;
       margin: 12px 0 10px;
+      position: relative;
+      z-index: 1;
     }
 
     .case-buttons.center{
       justify-content: center;
+      margin: 14px 0 0; /* fixes the "weird bottom gap" feeling */
     }
 
     .mini-btn{
@@ -381,11 +481,22 @@
       color: rgba(255,255,255,.92);
       padding: 10px 12px;
       border-radius: 12px;
-      font-weight: 900;
+      font-weight: 950;
       cursor: pointer;
       transition: transform .18s ease, background .18s ease, border-color .18s ease;
       text-decoration: none;
-      display: inline-block;
+      display: inline-flex;
+      align-items:center;
+      gap: 8px;
+    }
+
+    .mini-btn::before{
+      content:"";
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--a), var(--b));
+      box-shadow: 0 0 0 5px rgba(255,255,255,.04);
     }
 
     .mini-btn:hover{
@@ -403,8 +514,9 @@
       justify-content: space-between;
       gap: 12px;
       color: rgba(255,255,255,.70);
-      font-weight: 800;
+      font-weight: 850;
       font-size: 13px;
+      flex-wrap: wrap;
     }
     .footnote{ color: rgba(255,255,255,.55); }
 
@@ -415,11 +527,11 @@
 
     .hoverlift:hover{
       transform: translateY(-3px);
-      box-shadow: 0 20px 70px rgba(0,0,0,.35);
+      box-shadow: 0 22px 90px rgba(0,0,0,.38);
       border-color: rgba(255,255,255,.16);
     }
 
-    /* Modal */
+    /* Modal (flashier) */
     .modal{
       position: fixed;
       inset: 0;
@@ -432,60 +544,145 @@
     .modal-backdrop{
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,.60);
-      backdrop-filter: blur(6px);
+      background: rgba(0,0,0,.62);
+      backdrop-filter: blur(8px);
       animation: fadeIn .18s ease both;
     }
 
     .modal-card{
       position: relative;
-      max-width: 860px;
-      margin: 60px auto;
+      max-width: 920px;
+      margin: 56px auto;
       background: rgba(15,18,28,.92);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 20px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 34px 140px rgba(0,0,0,.60);
+      animation: popIn .2s ease both;
+      overflow:hidden;
+    }
+
+    /* gradient rim */
+    .modal-card::before{
+      content:"";
+      position:absolute;
+      inset: -1px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(110,120,255,.45), rgba(0,255,200,.25), rgba(255,255,255,0));
+      opacity: .55;
+      pointer-events:none;
+      mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+      -webkit-mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+      padding: 1px;
+    }
+
+    .modal-top{
+      position: relative;
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 4px 2px 0;
+      z-index: 1;
+    }
+
+    .modal-title-wrap{ display:flex; flex-direction:column; gap: 10px; }
+
+    .modal-eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      width: fit-content;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,255,255,.12);
-      border-radius: 18px;
-      padding: 22px 22px 18px;
-      box-shadow: 0 30px 120px rgba(0,0,0,.55);
-      animation: popIn .18s ease both;
+      color: rgba(255,255,255,.82);
+      font-weight: 950;
+      font-size: 12px;
+    }
+    .modal-eyebrow .spark{
+      width: 10px;
+      height: 10px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--a), var(--b));
+      box-shadow: 0 0 0 6px rgba(255,255,255,.04);
+    }
+
+    #modalTitle{
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+      font-weight: 1100;
+      position: relative;
+      z-index: 1;
     }
 
     .modal-x{
-      position: absolute;
-      top: 14px;
-      right: 14px;
       background: rgba(255,255,255,.08);
       border: 1px solid rgba(255,255,255,.14);
       color: rgba(255,255,255,.9);
       border-radius: 12px;
-      padding: 8px 10px;
+      padding: 10px 12px;
       cursor: pointer;
+      font-weight: 1000;
+      z-index: 1;
     }
 
     .modal-body{
-      margin-top: 10px;
+      position: relative;
+      z-index: 1;
+      margin-top: 12px;
       color: rgba(255,255,255,.84);
-      line-height: 1.6;
+      line-height: 1.65;
       font-weight: 650;
     }
 
     .modal-body h3{
-      margin: 14px 0 8px;
+      margin: 16px 0 8px;
       font-size: 15px;
       color: rgba(255,255,255,.92);
+      letter-spacing: -0.1px;
     }
 
     .modal-body ul{
       margin: 8px 0 0 18px;
-      color: rgba(255,255,255,.80);
+      color: rgba(255,255,255,.82);
     }
 
     .modal-body img{
       width: 100%;
       height: auto;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      margin-top: 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      margin-top: 12px;
       display:block;
+      box-shadow: 0 24px 90px rgba(0,0,0,.36);
+      cursor: zoom-in;
+    }
+
+    .stat-row{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .stat{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .stat-top{
+      color: rgba(255,255,255,.62);
+      font-weight: 950;
+      font-size: 12px;
+    }
+    .stat-big{
+      margin-top: 6px;
+      font-weight: 1100;
+      letter-spacing: -0.2px;
     }
 
     @keyframes fadeIn{
@@ -494,7 +691,7 @@
     }
 
     @keyframes popIn{
-      from{ transform: translateY(10px) scale(.98); opacity: 0; }
+      from{ transform: translateY(10px) scale(.985); opacity: 0; }
       to{ transform: translateY(0) scale(1); opacity: 1; }
     }
 
@@ -520,6 +717,8 @@
       .grid2{ grid-template-columns: 1fr; }
       .grid3{ grid-template-columns: 1fr; }
       .work-banner{ height: 230px; }
+      .stat-row{ grid-template-columns: 1fr; }
+      .modal-card{ margin: 48px 4%; }
     }
   </style>
 </head>
@@ -527,7 +726,7 @@
 <body>
   <header class="nav">
     <div class="container nav-inner">
-      <a class="logo" href="#home">Brandon Tran</a>
+      <a class="logo" href="#home"><span class="logo-dot"></span>Brandon Tran</a>
 
       <nav class="links">
         <a href="#home">Home</a>
@@ -696,7 +895,7 @@
     <section id="works" class="section reveal">
       <div class="section-top">
         <h2>Projects</h2>
-        <p class="section-note">Case studies open in popups.</p>
+        <p class="section-note">Projects open in popups.</p>
       </div>
 
       <div class="work-banner hoverlift">
@@ -718,8 +917,8 @@
           </p>
 
           <div class="case-buttons">
-            <button class="mini-btn" type="button" data-modal="barcode">Barcode Scanning Project</button>
-            <button class="mini-btn" type="button" data-modal="expedited">Expedited Orders Project</button>
+            <button class="mini-btn" type="button" data-modal="barcode">Open project</button>
+            <button class="mini-btn" type="button" data-modal="expedited">Open project</button>
           </div>
 
           <div class="pillrow">
@@ -740,6 +939,12 @@
             <li>ITGC mindset, walkthroughs, evidence, and documentation</li>
             <li>Interest areas: SOX, ERP controls, governance, scalable processes</li>
           </ul>
+
+          <div class="pillrow">
+            <span class="tag">Controls testing</span>
+            <span class="tag">SOX / ITGC</span>
+            <span class="tag">Documentation</span>
+          </div>
         </div>
 
         <div class="card hoverlift">
@@ -751,19 +956,34 @@
             <li>Worked in an 8-person team to build executive-facing deliverables</li>
             <li>Converted messy inputs into clear action steps and strategy</li>
           </ul>
+
+          <div class="pillrow">
+            <span class="tag">Research</span>
+            <span class="tag">Synthesis</span>
+            <span class="tag">Exec decks</span>
+          </div>
         </div>
 
+        <!-- META (fixed spacing + centered button row) -->
         <div class="card hoverlift">
           <h3 class="card-h">Meta • Business Planning Consultant (AI Case Project)</h3>
           <p class="card-p">
             Built a practical AI moderation workflow with human-in-the-loop checkpoints — focused on scale and operational clarity.
           </p>
+
           <div class="case-buttons center">
-            <button class="mini-btn" type="button" data-modal="meta">Open Meta AI Case Study</button>
+            <button class="mini-btn" type="button" data-modal="meta">Open project</button>
+          </div>
+
+          <!-- added tag row so the card doesn't feel like it has an awkward bottom gap -->
+          <div class="pillrow">
+            <span class="tag">Ops model</span>
+            <span class="tag">Human-in-loop</span>
+            <span class="tag">Scale</span>
           </div>
         </div>
 
-        <!-- NEW: Tran Web Advisory -->
+        <!-- Tran Web Advisory (fixed: remove resume button + rename to Open project) -->
         <div class="card hoverlift">
           <h3 class="card-h">Tran Web Advisory • Client Portfolio Websites</h3>
           <p class="card-p">
@@ -772,7 +992,8 @@
           </p>
 
           <div class="case-buttons">
-            <button class="mini-btn" type="button" data-modal="tranweb">Open Project</button>
+            <button class="mini-btn" type="button" data-modal="tranweb">Open project</button>
+          </div>
 
           <div class="pillrow">
             <span class="tag">HTML/CSS/JS</span>
@@ -791,6 +1012,12 @@
           <p class="card-p" style="color: rgba(255,255,255,.64);">
             Those roles taught me pace, ownership, and leadership when things get chaotic.
           </p>
+
+          <div class="pillrow">
+            <span class="tag">Leadership</span>
+            <span class="tag">Operations</span>
+            <span class="tag">Customer experience</span>
+          </div>
         </div>
       </div>
     </section>
@@ -832,8 +1059,14 @@
     <div class="modal-backdrop" data-close="true"></div>
 
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-x" aria-label="Close" data-close="true">✕</button>
-      <h2 id="modalTitle"></h2>
+      <div class="modal-top">
+        <div class="modal-title-wrap">
+          <div class="modal-eyebrow"><span class="spark"></span> Project details</div>
+          <h2 id="modalTitle"></h2>
+        </div>
+        <button class="modal-x" aria-label="Close" data-close="true">✕</button>
+      </div>
+
       <div id="modalBody" class="modal-body"></div>
     </div>
   </div>
@@ -878,18 +1111,26 @@
             decisions moving and remove blockers.
           </p>
 
+          <div class="stat-row">
+            <div class="stat">
+              <div class="stat-top">Manual entry</div>
+              <div class="stat-big">↓ 75%</div>
+            </div>
+            <div class="stat">
+              <div class="stat-top">Fulfillment speed</div>
+              <div class="stat-big">↑ 40%</div>
+            </div>
+            <div class="stat">
+              <div class="stat-top">Process improvements</div>
+              <div class="stat-big">3 shipped</div>
+            </div>
+          </div>
+
           <h3>My role</h3>
           <ul>
             <li>Main point of contact between internal stakeholders and vendors</li>
             <li>Coordinated and led vendor meetings to align requirements and timelines</li>
             <li>Supported SAP-adjacent workflow improvements to streamline fulfillment</li>
-          </ul>
-
-          <h3>Results</h3>
-          <ul>
-            <li>Eliminated 75% of manual data entry</li>
-            <li>Accelerated fulfillment speed by 40%</li>
-            <li>Drove three division-wide process enhancements</li>
           </ul>
         `
       },
@@ -902,18 +1143,26 @@
             The goal was to help production treat expedites as exceptions, not the default.
           </p>
 
+          <div class="stat-row">
+            <div class="stat">
+              <div class="stat-top">Records analyzed</div>
+              <div class="stat-big">120k+</div>
+            </div>
+            <div class="stat">
+              <div class="stat-top">Urgent requests</div>
+              <div class="stat-big">↓ 25%</div>
+            </div>
+            <div class="stat">
+              <div class="stat-top">Reporting time</div>
+              <div class="stat-big">↓ 40%</div>
+            </div>
+          </div>
+
           <h3>What I did</h3>
           <ul>
             <li>Analyzed 120,000+ order records to identify bottlenecks and root causes</li>
             <li>Built automated dashboards using Excel VBA and Power BI</li>
             <li>Created reporting leaders could use for planning and prioritization</li>
-          </ul>
-
-          <h3>Results</h3>
-          <ul>
-            <li>Reduced urgent requests by 25%</li>
-            <li>Increased throughput by 15%</li>
-            <li>Cut reporting time by 40%</li>
           </ul>
         `
       },
@@ -926,23 +1175,34 @@
             and clear ownership of edge cases.
           </p>
 
+          <div class="stat-row">
+            <div class="stat">
+              <div class="stat-top">Backlog</div>
+              <div class="stat-big">↓ 20%*</div>
+            </div>
+            <div class="stat">
+              <div class="stat-top">Review costs</div>
+              <div class="stat-big">↓ 12%*</div>
+            </div>
+            <div class="stat">
+              <div class="stat-top">Efficiency</div>
+              <div class="stat-big">↑ 30%*</div>
+            </div>
+          </div>
+
+          <p style="margin-top:10px; color: rgba(255,255,255,.66); font-weight: 650;">
+            *Projected impact from pilot recommendations.
+          </p>
+
           <h3>What we built</h3>
           <ul>
             <li>AI-driven moderation workflow with human validation at key points</li>
             <li>Operating model focused on scale, consistency, and accountability</li>
             <li>Recommendations structured for pilot-to-scale rollout</li>
           </ul>
-
-          <h3>Projected impact</h3>
-          <ul>
-            <li>Reduced content backlog by 20% across five pilot teams</li>
-            <li>Projected 12% reduction in review costs</li>
-            <li>Projected 30% improvement in moderation efficiency</li>
-          </ul>
         `
       },
 
-      // NEW: Tran Web Advisory popup
       tranweb: {
         title: "Tran Web Advisory — Client Portfolio Websites",
         body: `
@@ -951,12 +1211,20 @@
             I handle the full build end-to-end — layout, copy flow, implementation, and GitHub Pages deployment.
           </p>
 
-          <h3>Snapshot</h3>
-          <ul>
-            <li><strong>4 clients</strong> delivered</li>
-            <li><strong>$450+ revenue</strong> earned from paid builds</li>
-            <li>Stack: HTML/CSS/JS + GitHub Pages</li>
-          </ul>
+          <div class="stat-row">
+            <div class="stat">
+              <div class="stat-top">Clients</div>
+              <div class="stat-big">4</div>
+            </div>
+            <div class="stat">
+              <div class="stat-top">Revenue</div>
+              <div class="stat-big">$450+</div>
+            </div>
+            <div class="stat">
+              <div class="stat-top">Delivery</div>
+              <div class="stat-big">GitHub Pages</div>
+            </div>
+          </div>
 
           <h3>XYZ bullets (real impact)</h3>
           <ul>
@@ -965,11 +1233,16 @@
             <li><strong>Shipped</strong> responsive GitHub Pages sites with polished UI details (spacing, typography, hover states), <strong>so pages feel modern</strong> instead of “student template.”</li>
           </ul>
 
-          <h3>Client example</h3>
-          <p style="margin: 0; color: rgba(255,255,255,.72); font-weight: 650;">
+          <h3>Client example (Katherine)</h3>
+          <p style="margin: 0; color: rgba(255,255,255,.70); font-weight: 650;">
             Pastel theme + bento layout + interactive case study (screenshot).
           </p>
-          <img src="katherine-client.jpg" alt="Client website example screenshot" />
+
+          <!-- IMPORTANT: per your file name -->
+          <img src="./katherine-client" alt="Client website example screenshot" />
+          <p style="margin-top:10px; color: rgba(255,255,255,.60); font-weight: 650;">
+            Tip: GitHub Pages is case-sensitive — the filename must match exactly (including extension if you have one).
+          </p>
         `
       }
     };
@@ -995,6 +1268,10 @@
       if (btn) openModal(btn.getAttribute("data-modal"));
 
       if (e.target.matches("[data-close]")) closeModal();
+
+      // click image in modal -> open in new tab (flashy + useful)
+      const img = e.target.closest(".modal-body img");
+      if (img) window.open(img.getAttribute("src"), "_blank", "noopener");
     });
 
     document.addEventListener("keydown", (e) => {
